@@ -111,6 +111,20 @@ section { padding: 96px 0; }
 .chip { font-size: 12px; font-weight: 700; letter-spacing: .06em; padding: 3px 10px; border-radius: 999px; border: 1.5px solid var(--ink); }
 .chip.on { background: var(--ink); color: var(--paper); }
 
+.teaser {
+  position: relative; display: grid; place-items: center;
+  background: var(--grid), var(--tint); color: #fff;
+}
+.teaser strong { font-size: clamp(34px, 4vw, 46px); font-weight: 800; letter-spacing: .14em; text-transform: uppercase; text-shadow: 0 2px 18px rgba(0, 0, 0, .35); }
+.teaser .status {
+  position: absolute; top: 14px; left: 14px; font-size: 12px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; padding: 4px 11px; border-radius: 999px; background: var(--paper); color: var(--ink);
+}
+.card.soon .body { gap: 8px; }
+.scorch { --tint: radial-gradient(ellipse at 50% 120%, #FFB347 0%, #E25E22 38%, #5A1A08 78%, #1E0C06 100%); }
+.dustfall { --tint: radial-gradient(ellipse at 30% 0%, #F2D9A6 0%, #D4A35E 40%, #8C5A2B 80%, #4A2E16 100%); }
+.amberfall { --tint: radial-gradient(ellipse at 70% 10%, #F7C35C 0%, #D9772A 42%, #9A3417 78%, #4A1B10 100%); }
+
 /* videos */
 .dark { background: var(--night); color: var(--paper); }
 .dark .sec-head p, .dark .muted { color: #B7B3A6; }

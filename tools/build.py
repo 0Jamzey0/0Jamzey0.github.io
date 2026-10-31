@@ -124,6 +124,18 @@ ASSETS = [
     ),
 ]
 
+UPCOMING = [
+    dict(slug="scorch", name="Scorch", sub="Dynamic Fire & Burn System for HDRP", pipelines=["HDRP"],
+         status="Coming soon",
+         tag="Fire that spreads, chars and burns through any object, without changing its materials."),
+    dict(slug="dustfall", name="Dustfall", sub="Sand, Dust & Sandstorms for HDRP", pipelines=["HDRP"],
+         status="In development",
+         tag="Sand that takes footprints and tire tracks, dust on every surface, and towering sandstorms."),
+    dict(slug="amberfall", name="Amberfall", sub="Autumn Leaves & Seasonal Foliage for HDRP & URP",
+         pipelines=["HDRP", "URP"], status="In development",
+         tag="Autumn leaves that fall, gather and drift through your scenes as the season turns."),
+]
+
 def chips(a):
     return '<div class="chips">' + "".join(
         f'<span class="chip{" on" if p in a["pipelines"] else ""}">{p}</span>' for p in ("HDRP", "URP")) + "</div>"
@@ -208,6 +220,17 @@ def card(a):
   </div>
 </a>"""
 
+def teaser(a):
+    return f"""<a class="card soon {a['slug']}" href="{PATREON}" target="_blank" rel="noopener">
+  <div class="shot teaser"><span class="status">{a['status']}</span><strong>{a['name']}</strong></div>
+  <div class="body">
+    {chips(a)}
+    <span class="tag">{escape(a['sub'])}</span>
+    <p>{escape(a['tag'])}</p>
+    <span class="more">Follow progress on Patreon →</span>
+  </div>
+</a>"""
+
 def index():
     vids = [v for a in ASSETS for v in a["videos"]]
     return head("Jamzey St. · Weather, surfaces & VFX for Unity",
@@ -244,6 +267,18 @@ def index():
     </div>
     <div class="cards">
 {"".join(card(a) for a in ASSETS)}
+    </div>
+  </div>
+</section>
+
+<section id="upcoming" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="kicker">In the workshop</div><h2>Coming <em>next</em></h2></div>
+      <p>Fire, sand and autumn leaves are on the bench. Patreon members see them first.</p>
+    </div>
+    <div class="cards">
+{"".join(teaser(a) for a in UPCOMING)}
     </div>
   </div>
 </section>
