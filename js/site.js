@@ -6,13 +6,15 @@ document.querySelector(".menu-btn")?.addEventListener("click", e => {
 document.querySelectorAll(".yt").forEach(btn => {
   btn.style.backgroundImage = `url(https://i.ytimg.com/vi/${btn.dataset.id}/hqdefault.jpg)`;
   btn.addEventListener("click", () => {
+    const frame = document.createElement("div");
+    frame.className = "yt-frame";
     const f = document.createElement("iframe");
     f.src = `https://www.youtube-nocookie.com/embed/${btn.dataset.id}?autoplay=1&rel=0`;
     f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
     f.allowFullscreen = true;
     f.title = btn.getAttribute("aria-label");
-    btn.replaceChildren(f);
-    btn.style.cursor = "default";
+    frame.append(f);
+    btn.replaceWith(frame);
   }, { once: true });
 });
 

@@ -200,6 +200,7 @@ FOOT = f"""<footer>
   </div>
 </footer>
 <script src="js/site.js"></script>
+<script src="js/grid.js"></script>
 </body>
 </html>
 """

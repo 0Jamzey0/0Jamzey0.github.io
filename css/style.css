@@ -67,6 +67,11 @@ p { margin: 0; }
   content: ""; position: absolute; inset: 0; z-index: 0;
   background: radial-gradient(ellipse 50% 60% at 50% 50%, var(--bg) 0%, rgba(233, 231, 218, .85) 60%, rgba(233, 231, 218, 0) 100%);
 }
+.hero, .p-hero { isolation: isolate; position: relative; }
+.live-grid { background-image: none !important; }
+.hero.live-grid::before { display: none; }
+.grid-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.p-hero .wrap { position: relative; z-index: 1; }
 .eyebrow {
   display: inline-flex; align-items: center; gap: 14px;
   font-weight: 700; font-size: 13px; letter-spacing: .32em; text-transform: uppercase;
@@ -149,7 +154,8 @@ figure { margin: 0; }
 }
 .yt:hover .play { transform: scale(1.1); }
 .yt .play::before { content: ""; margin-left: 6px; border-style: solid; border-width: 13px 0 13px 21px; border-color: transparent transparent transparent #fff; }
-.yt iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.yt-frame { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; background: #000; }
+.yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .channel { margin-top: 40px; text-align: center; }
 .dark .btn-ghost { color: var(--paper); border-color: var(--paper); }
 .dark .btn-ghost:hover { background: var(--paper); color: var(--ink); }
