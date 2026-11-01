@@ -31,7 +31,7 @@
         for (let c = Math.floor(lo / STEP) * STEP; c <= hi; c += STEP) {
           const near = cur.s > .001 &&
             Math.abs(cur.y - (dir * SLOPE * cur.x + c)) / Math.hypot(1, SLOPE) < SIGMA * 3;
-          const dx = near ? 5 : W;
+          const dx = near ? 5 : Math.max(W, 1);
           for (let x = 0; x <= W + dx - 1; x += dx) {
             const xx = Math.min(x, W), [px, py] = warp(xx, dir * SLOPE * xx + c);
             x === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
@@ -41,6 +41,7 @@
     };
 
     const draw = () => {
+      if (W < 1 || H < 1) return;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
       ctx.globalCompositeOperation = "source-over";
@@ -107,6 +108,7 @@
       canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
       draw();
     };
+    resize();
     new ResizeObserver(resize).observe(host);
 
     if (still) return;

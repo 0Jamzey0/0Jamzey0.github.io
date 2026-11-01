@@ -1,8 +1,10 @@
 """Generates index.html and one page per asset. Edit the data below, then: python tools/build.py"""
-import os
+import hashlib, os
 from html import escape
 
 SITE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+VER = hashlib.sha1(b"".join(open(os.path.join(SITE, f), "rb").read()
+                            for f in ("css/style.css", "js/site.js", "js/grid.js"))).hexdigest()[:8]
 URL = "https://0jamzey0.github.io/"
 STORE = "https://assetstore.unity.com/publishers/100637"
 YOUTUBE = "https://www.youtube.com/@Jamzey-Dev"
@@ -159,7 +161,7 @@ def head(title, desc, path=""):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v={VER}">
 </head>
 <body>
 <header class="top">
@@ -199,8 +201,8 @@ FOOT = f"""<footer>
     <p class="fine">© 2026 Jamzey St. Unity is a trademark of Unity Technologies; this site is not affiliated with Unity.</p>
   </div>
 </footer>
-<script src="js/site.js"></script>
-<script src="js/grid.js"></script>
+<script src="js/site.js?v={VER}"></script>
+<script src="js/grid.js?v={VER}"></script>
 </body>
 </html>
 """
