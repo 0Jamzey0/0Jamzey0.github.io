@@ -1,6 +1,6 @@
 (() => {
   const STEP = 32, SLOPE = Math.tan(Math.PI / 6);
-  const SIGMA = 130, PUSH = 46, GLOW = 240;
+  const SIGMA = 80, PUSH = 28, GLOW = 150;
   const HALF = STEP / 2 / SLOPE;
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
