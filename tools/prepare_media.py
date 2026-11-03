@@ -8,13 +8,16 @@ SITE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA = "D:/StoreAssetProjects_Media/Publishing"
 
 GALLERY = {
-    "frostfall": ("Frostfall", ["01_hero", "02_footprints", "03_overlay_before_after", "04_trench",
-                                "05_shelter", "06_calm_to_blizzard", "10_wind_driven_snow", "14_presets"]),
-    "downpour": ("Downpour", ["01_Hero", "02_Before_After", "04_Puddles", "07_Running_Drops",
-                              "09_Glass", "11_Shelter", "14_Lightning", "19_Presets"]),
-    "carve": ("POM", ["01_Hero", "02_Before_After", "03_Curved_Outlines", "05_Self_Shadows",
-                      "12_Decals", "14_Triplanar", "18_Town", "24_Materials"]),
+    "frostfall": ("Frostfall/Fab/Gallery", ".jpg", ["01_hero", "02_footprints", "03_overlay_before_after", "04_trench",
+                                                    "05_shelter", "06_calm_to_blizzard", "10_wind_driven_snow", "14_presets"]),
+    "downpour": ("Downpour/Fab/Gallery", ".jpg", ["01_Hero", "02_Before_After", "04_Puddles", "07_Running_Drops",
+                                                  "09_Glass", "11_Shelter", "14_Lightning", "19_Presets"]),
+    "carve": ("POM/Fab/Gallery", ".jpg", ["01_Hero", "02_Before_After", "03_Curved_Outlines", "05_Self_Shadows",
+                                          "12_Decals", "14_Triplanar", "18_Town", "24_Materials"]),
+    "editor-customizer": ("Cockpit/StoreMedia", ".png", ["01_make_it_yours", "02_one_window", "03_themes", "04_hierarchy",
+                                                         "05_project", "06_quick_actions", "07_editor_health", "08_guided_tour"]),
 }
+CARD = {"editor-customizer": "Cockpit/StoreMedia/KeyImages/YouTube_Thumbnail_1280x720.png"}
 
 def save(im, path, width, q=82):
     im = im.convert("RGB")
@@ -23,13 +26,14 @@ def save(im, path, width, q=82):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     im.save(path, "JPEG", quality=q, optimize=True, progressive=True)
 
-for slug, (folder, picks) in GALLERY.items():
+for slug, (folder, ext, picks) in GALLERY.items():
     for name in picks:
-        src = Image.open(f"{MEDIA}/{folder}/Fab/Gallery/{name}.jpg")
+        src = Image.open(f"{MEDIA}/{folder}/{name}{ext}")
         out = f"{SITE}/img/{slug}/{name.lower()}"
-        save(src, out + ".jpg", 1600)
-        save(src, out + "_thumb.jpg", 640, 78)
-    save(Image.open(f"{MEDIA}/{folder}/Fab/Gallery/{picks[0]}.jpg"), f"{SITE}/img/{slug}/card.jpg", 960)
+        save(src, out + ".jpg", 1600, 86 if ext == ".png" else 82)
+        save(src, out + "_thumb.jpg", 640, 80 if ext == ".png" else 78)
+    card = CARD.get(slug, f"{folder}/{picks[0]}{ext}")
+    save(Image.open(f"{MEDIA}/{card}"), f"{SITE}/img/{slug}/card.jpg", 960, 86 if slug in CARD else 82)
 
 social = Image.open(f"{MEDIA}/Fab_Profile/JamzeySt_Fab_Cover_1920x540.png").convert("RGB")
 canvas = Image.new("RGB", (1200, 630), social.getpixel((4, 4)))

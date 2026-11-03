@@ -124,6 +124,50 @@ ASSETS = [
                ("Materials", "13 included"), ("Version", "1.0.0"),
                ("Demo scenes", "3 per pipeline"), ("Content", "100% original")],
     ),
+    dict(
+        slug="editor-customizer", name="Editor Customizer", sub="Themes, Hierarchy, Toolbar & Editor Health",
+        store=None, status="Coming soon", version="1.0.0",
+        pipelines=["Built-in", "URP", "HDRP"], chipset=("Built-in", "URP", "HDRP"),
+        tag="Make the Unity editor yours: your colours, a Hierarchy you read at a glance, your tools one click away.",
+        lead="Five modules in one window, each with its own switch: themes for every Unity panel, a Hierarchy and "
+             "Project you can read at a glance, your tools one click away, and a health check that tells you in "
+             "plain words why Unity is slow. Nothing changes until you say so.",
+        videos=[("video/editor-customizer-trailer.mp4", "Editor Customizer trailer",
+                 "Themes, Hierarchy, toolbar & Editor Health")],
+        features=[
+            ("Make it yours", ["Recolour the whole editor from four colours",
+                               "Presets, your own themes, and theme files to share with your team",
+                               "A Play Mode colour wash so you never edit while playing by accident",
+                               "Any font, bold or italic, and text size from 80 to 130%"]),
+            ("Find things at a glance", ["Header rows that never reach your builds",
+                                         "Row colours and icons, plus rules by component, tag, layer or name",
+                                         "Coloured folders with badges; common folders colour themselves",
+                                         "270+ hand-picked icons plus Unity's 1,300+ built-in icons"]),
+            ("Your tools in reach", ["One-click actions for any menu item, with your own keys",
+                                     "Scene switcher, Play From First Scene and Fast Play",
+                                     "Play Mode time scale, frame-rate cap and one-click screenshots"]),
+            ("Editor Health", ["One plain sentence a day on how long Unity made you wait, and why",
+                               "Every compile, domain reload and Play Mode change timed, with a 7-day chart",
+                               "Slow [InitializeOnLoad] callbacks named and grouped by package",
+                               "Memory warnings and a console grouped by package"]),
+            ("Safe by default", ["Every module starts switched off",
+                                 "One click puts back Unity's own look, exactly",
+                                 "Nothing is written into your scenes, prefabs or the Unity install",
+                                 "Styles live in a ProjectSettings file your team shares"]),
+            ("Built to extend", ["One window with search, a switch and a card for each module",
+                                 "A hands-on guided tour in the demo scene",
+                                 "Write your own modules by deriving one class",
+                                 "Theme switch in about 50 ms; under 0.02% of editor time when on"]),
+        ],
+        gallery=[("01_make_it_yours", "Editor Customizer versus Unity's default look"),
+                 ("02_one_window", "One window for every module"), ("03_themes", "Editor themes"),
+                 ("04_hierarchy", "Hierarchy styling"), ("05_project", "Project folder colours"),
+                 ("06_quick_actions", "Toolbar and quick actions"), ("07_editor_health", "Editor Health"),
+                 ("08_guided_tour", "Guided tour in the demo scene")],
+        specs=[("Unity", "6.0 LTS or newer"), ("Render pipelines", "Any: Built-in, URP, HDRP"),
+               ("Runs in", "Editor only, nothing added to builds"), ("Version", "1.0.0"),
+               ("Demo", "Guided tour scene"), ("Manual", "22-page PDF")],
+    ),
 ]
 
 UPCOMING = [
@@ -140,7 +184,13 @@ UPCOMING = [
 
 def chips(a):
     return '<div class="chips">' + "".join(
-        f'<span class="chip{" on" if p in a["pipelines"] else ""}">{p}</span>' for p in ("HDRP", "URP")) + "</div>"
+        f'<span class="chip{" on" if p in a["pipelines"] else ""}">{p}</span>'
+        for p in a.get("chipset", ("HDRP", "URP"))) + "</div>"
+
+def store_button(a, label):
+    if a["store"]:
+        return f'<a class="btn btn-primary" href="{a["store"]}" target="_blank" rel="noopener">{label}</a>'
+    return '<span class="btn btn-soon" aria-disabled="true">Coming soon to the Asset Store</span>'
 
 def head(title, desc, path=""):
     return f"""<!doctype html>
@@ -208,12 +258,17 @@ FOOT = f"""<footer>
 """
 
 def video(vid, title, note):
+    cap = f'<figcaption>{escape(title)}<small>{escape(note)}</small></figcaption>'
+    if vid.endswith(".mp4"):
+        poster = "img/" + vid.split("/")[1].replace("-trailer.mp4", "") + "/card.jpg"
+        return (f'<figure class="video"><div class="yt-frame"><video controls preload="none" playsinline '
+                f'poster="{poster}" aria-label="{escape(title)}"><source src="{vid}" type="video/mp4"></video></div>{cap}</figure>')
     return (f'<figure class="video"><button class="yt" data-id="{vid}" aria-label="Play {escape(title)}">'
-            f'<span class="play"></span></button><figcaption>{escape(title)}<small>{escape(note)}</small></figcaption></figure>')
+            f'<span class="play"></span></button>{cap}</figure>')
 
 def card(a):
     return f"""<a class="card" href="{a['slug']}.html">
-  <div class="shot"><img src="img/{a['slug']}/card.jpg" alt="{a['name']}" loading="lazy" width="960" height="540"></div>
+  <div class="shot">{f'<span class="status">{a["status"]}</span>' if a.get("status") else ""}<img src="img/{a['slug']}/card.jpg" alt="{a['name']}" loading="lazy" width="960" height="540"></div>
   <div class="body">
     {chips(a)}
     <h3>{a['name']}</h3>
@@ -235,7 +290,8 @@ def teaser(a):
 </a>"""
 
 def index():
-    vids = [v for a in ASSETS for v in a["videos"]]
+    vids = [v for a in sorted(ASSETS, key=lambda a: bool(a["store"])) for v in a["videos"]]
+    live = sum(1 for a in ASSETS if a["store"])
     return head("Jamzey St. · Weather, surfaces & VFX for Unity",
                 "Drop-in environment tools for Unity: deformable snow, rain and wet surfaces, and silhouette "
                 "parallax occlusion mapping for HDRP and URP.") + f"""
@@ -255,7 +311,7 @@ def index():
   </div>
 </section>
 <div class="facts">
-  <span>{len(ASSETS)} assets on the Unity Asset Store</span>
+  <span>{live} assets on the Unity Asset Store</span>
   <span>Built for Unity 6</span>
   <span>HDRP &amp; URP</span>
   <span>Demo scenes + full documentation</span>
@@ -268,7 +324,7 @@ def index():
       <p>Each package drops into an existing scene, ships with playable demos, and is documented for people who'd
         rather build their game than read a manual.</p>
     </div>
-    <div class="cards">
+    <div class="cards{' two' if len(ASSETS) % 3 else ''}">
 {"".join(card(a) for a in ASSETS)}
     </div>
   </div>
@@ -289,10 +345,10 @@ def index():
 <section id="videos" class="dark">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="kicker">YouTube</div><h2>See them <em>in motion</em></h2></div>
+      <div><div class="kicker">Videos</div><h2>See them <em>in motion</em></h2></div>
       <p>Trailers and update videos, captured in real time in Unity.</p>
     </div>
-    <div class="videos">
+    <div class="videos{' lead-wide' if len(vids) % 2 else ''}">
 {"".join(video(*v) for v in vids)}
     </div>
     <div class="channel"><a class="btn btn-ghost" href="{YOUTUBE}" target="_blank" rel="noopener">Visit the YouTube channel</a></div>
@@ -347,7 +403,7 @@ def product(a):
       <p class="sub">{escape(a['sub'])}</p>
       <p class="lead">{escape(a['lead'])}</p>
       <div class="cta">
-        <a class="btn btn-primary" href="{a['store']}" target="_blank" rel="noopener">Get it on the Asset Store</a>
+        {store_button(a, "Get it on the Asset Store")}
         <a class="btn btn-ghost" href="#video">Watch the trailer</a>
       </div>
     </div>
@@ -388,7 +444,7 @@ def product(a):
     <dl class="specs">
 {"".join(f'<div><dt>{escape(k)}</dt><dd>{escape(v)}</dd></div>' for k, v in a['specs'])}
     </dl>
-    <div style="margin-top:36px"><a class="btn btn-primary" href="{a['store']}" target="_blank" rel="noopener">View {a['name']} on the Asset Store</a></div>
+    <div style="margin-top:36px">{store_button(a, f"View {a['name']} on the Asset Store")}</div>
   </div>
 </section>
 
