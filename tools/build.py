@@ -14,7 +14,7 @@ EMAIL = "jamzeyst@gmail.com"
 ASSETS = [
     dict(
         slug="frostfall", name="Frostfall", sub="Deformable Snow for HDRP",
-        store="https://assetstore.unity.com/packages/package/412814", version="1.1.0",
+        store="https://assetstore.unity.com/packages/package/412814", version="1.1.0", hero="thumbnail",
         pipelines=["HDRP"],
         tag="Snow that piles up, takes footprints and covers every object.",
         lead="Open-world snow for the High Definition Render Pipeline. Characters leave boot prints, vehicles carve "
@@ -407,7 +407,7 @@ def product(a):
         <a class="btn btn-ghost" href="#video">Watch the trailer</a>
       </div>
     </div>
-    <div class="shot"><img src="img/{a['slug']}/{a['gallery'][0][0]}.jpg" alt="{escape(a['gallery'][0][1])}" width="1600" height="900"></div>
+    <div class="shot"><img src="img/{a['slug']}/{a.get('hero', a['gallery'][0][0])}.jpg" alt="{escape(a['name'] + ' – ' + a['sub'])}" width="1600" height="900"></div>
   </div>
 </section>
 

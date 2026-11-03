@@ -17,7 +17,9 @@ GALLERY = {
     "editor-customizer": ("Cockpit/StoreMedia", ".png", ["01_make_it_yours", "02_one_window", "03_themes", "04_hierarchy",
                                                          "05_project", "06_quick_actions", "07_editor_health", "08_guided_tour"]),
 }
-CARD = {"editor-customizer": "Cockpit/StoreMedia/KeyImages/YouTube_Thumbnail_1280x720.png"}
+CARD = {"editor-customizer": "Cockpit/StoreMedia/KeyImages/YouTube_Thumbnail_1280x720.png",
+        "frostfall": "Frostfall/Fab/Thumbnail_1920x1080.jpg"}
+HERO = {"frostfall": "Frostfall/Fab/Thumbnail_1920x1080.jpg"}
 
 def save(im, path, width, q=82):
     im = im.convert("RGB")
@@ -34,6 +36,8 @@ for slug, (folder, ext, picks) in GALLERY.items():
         save(src, out + "_thumb.jpg", 640, 80 if ext == ".png" else 78)
     card = CARD.get(slug, f"{folder}/{picks[0]}{ext}")
     save(Image.open(f"{MEDIA}/{card}"), f"{SITE}/img/{slug}/card.jpg", 960, 86 if slug in CARD else 82)
+    if slug in HERO:
+        save(Image.open(f"{MEDIA}/{HERO[slug]}"), f"{SITE}/img/{slug}/thumbnail.jpg", 1600, 86)
 
 social = Image.open(f"{MEDIA}/Fab_Profile/JamzeySt_Fab_Cover_1920x540.png").convert("RGB")
 canvas = Image.new("RGB", (1200, 630), social.getpixel((4, 4)))
