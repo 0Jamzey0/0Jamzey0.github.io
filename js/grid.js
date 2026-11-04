@@ -15,6 +15,13 @@
     let W = 0, H = 0, dpr = 1;
     const target = { x: 0, y: 0, s: 0 }, cur = { x: 0, y: 0, s: 0 };
     let raf = 0;
+    let lineColor = "";
+    const readColor = () => {
+      lineColor = getComputedStyle(document.documentElement).getPropertyValue("--grid-line").trim() || "rgba(22, 21, 20, .08)";
+    };
+    readColor();
+    new MutationObserver(() => { readColor(); draw(); })
+      .observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
     const warp = (x, y) => {
       if (cur.s < .001) return [x, y];
@@ -46,7 +53,7 @@
       ctx.clearRect(0, 0, W, H);
       ctx.globalCompositeOperation = "source-over";
       ctx.lineWidth = 1;
-      ctx.strokeStyle = "rgba(22, 21, 20, .08)";
+      ctx.strokeStyle = lineColor;
       lines();
       ctx.stroke();
       if (fade) {

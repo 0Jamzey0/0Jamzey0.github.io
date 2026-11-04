@@ -207,6 +207,7 @@ def head(title, desc, path=""):
 <meta property="og:image" content="{URL}img/{'social' if not path else path.replace('.html', '') + '/card'}.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#E9E7DA">
+<script>try{{if(localStorage.getItem("theme")==="dark"){{document.documentElement.dataset.theme="dark";document.querySelector('meta[name="theme-color"]').content="#141312"}}}}catch(e){{}}</script>
 <link rel="icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -225,6 +226,14 @@ def head(title, desc, path=""):
       <a href="{PATREON}" target="_blank" rel="noopener">Patreon</a>
       <a class="btn btn-primary btn-small" href="{STORE}" target="_blank" rel="noopener">Asset Store</a>
     </nav>
+    <button class="theme-toggle" type="button" aria-label="Night mode" aria-pressed="false" title="Switch to night mode">
+      <span class="tt-sky" aria-hidden="true"><i class="tt-cloud c1"></i><i class="tt-cloud c2"></i><i class="tt-star s1"></i><i class="tt-star s2"></i><i class="tt-star s3"></i><i class="tt-star s4"></i></span>
+      <span class="tt-knob" aria-hidden="true"><svg class="tt-icon" viewBox="0 0 24 24">
+        <mask id="tt-moon"><rect width="24" height="24" fill="#fff"/><circle class="tt-bite" cx="17.5" cy="7" r="6.5" fill="#000"/></mask>
+        <g mask="url(#tt-moon)"><circle class="tt-core" cx="12" cy="12" r="5"/></g>
+        <path class="tt-rays" d="M12 1.8v2.4M12 19.8v2.4M1.8 12h2.4M19.8 12h2.4M4.8 4.8l1.7 1.7M17.5 17.5l1.7 1.7M4.8 19.2l1.7-1.7M17.5 6.5l1.7-1.7"/>
+      </svg></span>
+    </button>
   </div>
 </header>
 """

@@ -12,11 +12,12 @@
 <meta property="og:image" content="https://0jamzey0.github.io/img/social.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#E9E7DA">
+<script>try{if(localStorage.getItem("theme")==="dark"){document.documentElement.dataset.theme="dark";document.querySelector('meta[name="theme-color"]').content="#141312"}}catch(e){}</script>
 <link rel="icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=63883950">
+<link rel="stylesheet" href="css/style.css?v=4fe471a0">
 </head>
 <body>
 <header class="top">
@@ -30,6 +31,14 @@
       <a href="https://www.patreon.com/cw/JamzeyDev" target="_blank" rel="noopener">Patreon</a>
       <a class="btn btn-primary btn-small" href="https://assetstore.unity.com/publishers/100637" target="_blank" rel="noopener">Asset Store</a>
     </nav>
+    <button class="theme-toggle" type="button" aria-label="Night mode" aria-pressed="false" title="Switch to night mode">
+      <span class="tt-sky" aria-hidden="true"><i class="tt-cloud c1"></i><i class="tt-cloud c2"></i><i class="tt-star s1"></i><i class="tt-star s2"></i><i class="tt-star s3"></i><i class="tt-star s4"></i></span>
+      <span class="tt-knob" aria-hidden="true"><svg class="tt-icon" viewBox="0 0 24 24">
+        <mask id="tt-moon"><rect width="24" height="24" fill="#fff"/><circle class="tt-bite" cx="17.5" cy="7" r="6.5" fill="#000"/></mask>
+        <g mask="url(#tt-moon)"><circle class="tt-core" cx="12" cy="12" r="5"/></g>
+        <path class="tt-rays" d="M12 1.8v2.4M12 19.8v2.4M1.8 12h2.4M19.8 12h2.4M4.8 4.8l1.7 1.7M17.5 17.5l1.7 1.7M4.8 19.2l1.7-1.7M17.5 6.5l1.7-1.7"/>
+      </svg></span>
+    </button>
   </div>
 </header>
 
@@ -207,7 +216,7 @@
     <p class="fine">© 2026 Jamzey St. Unity is a trademark of Unity Technologies; this site is not affiliated with Unity.</p>
   </div>
 </footer>
-<script src="js/site.js?v=63883950"></script>
-<script src="js/grid.js?v=63883950"></script>
+<script src="js/site.js?v=4fe471a0"></script>
+<script src="js/grid.js?v=4fe471a0"></script>
 </body>
 </html>
