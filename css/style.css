@@ -155,7 +155,8 @@ html.theme-fade *:not(.theme-toggle, .theme-toggle *)::before {
 .btn-small { padding: 8px 16px; font-size: 14px; }
 .btn-soon { background: var(--paper); color: var(--muted); border: 2px dashed var(--muted); cursor: default; }
 .btn-soon:hover { transform: none; }
-.nav .btn-primary { color: #fff; }
+.nav .btn-primary, .nav .btn-primary:hover { color: #fff; }
+:root[data-theme="dark"] .nav .btn-primary:hover { color: var(--bg); }
 
 /* hero */
 .hero { position: relative; overflow: hidden; background: var(--bg) var(--grid); border-bottom: 1px solid var(--line); }
