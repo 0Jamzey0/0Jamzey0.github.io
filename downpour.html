@@ -14,15 +14,14 @@
 <meta name="theme-color" content="#E9E7DA">
 <script>try{if(localStorage.getItem("theme")==="dark"){document.documentElement.dataset.theme="dark";document.querySelector('meta[name="theme-color"]').content="#141312"}}catch(e){}</script>
 <link rel="icon" href="favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=7f3d1b12">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css?v=65f559f1">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="index.html"><img src="img/mark.png" alt="" width="28" height="34">Jamzey St.</a>
+    <a class="brand" href="index.html"><img src="img/mark.webp" alt="" width="28" height="34" decoding="async">Jamzey St.</a>
     <button class="menu-btn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="nav">
       <a href="index.html#assets">Assets</a>
@@ -42,7 +41,7 @@
   </div>
 </header>
 
-<main>
+<main id="main">
 <section class="p-hero">
   <div class="wrap">
     <div>
@@ -56,7 +55,7 @@
         <a class="btn btn-ghost" href="#video">Watch the trailer</a>
       </div>
     </div>
-    <div class="shot"><img src="img/downpour/01_hero.jpg" alt="Downpour – Rain &amp; Wet Surfaces for HDRP" width="1600" height="900"></div>
+    <div class="shot"><img src="img/downpour/01_hero.webp" alt="Downpour – Rain &amp; Wet Surfaces for HDRP" width="1600" height="900" fetchpriority="high" decoding="async"></div>
   </div>
 </section>
 
@@ -82,7 +81,7 @@
   <div class="wrap">
     <div class="sec-head"><div><div class="kicker">Gallery</div><h2>Screenshots</h2></div><p>Click any shot to view it full size.</p></div>
     <div class="gallery">
-<button data-full="img/downpour/01_hero.jpg"><img src="img/downpour/01_hero_thumb.jpg" alt="Downpour hero street" loading="lazy" width="640" height="360"></button><button data-full="img/downpour/02_before_after.jpg"><img src="img/downpour/02_before_after_thumb.jpg" alt="Dry and wet, before and after" loading="lazy" width="640" height="360"></button><button data-full="img/downpour/04_puddles.jpg"><img src="img/downpour/04_puddles_thumb.jpg" alt="Puddles with ripples" loading="lazy" width="640" height="360"></button><button data-full="img/downpour/07_running_drops.jpg"><img src="img/downpour/07_running_drops_thumb.jpg" alt="Running drops" loading="lazy" width="640" height="360"></button><button data-full="img/downpour/09_glass.jpg"><img src="img/downpour/09_glass_thumb.jpg" alt="Drops on glass" loading="lazy" width="640" height="360"></button><button data-full="img/downpour/11_shelter.jpg"><img src="img/downpour/11_shelter_thumb.jpg" alt="Dry under shelter" loading="lazy" width="640" height="360"></button><button data-full="img/downpour/14_lightning.jpg"><img src="img/downpour/14_lightning_thumb.jpg" alt="Lightning" loading="lazy" width="640" height="360"></button><button data-full="img/downpour/19_presets.jpg"><img src="img/downpour/19_presets_thumb.jpg" alt="Weather presets" loading="lazy" width="640" height="360"></button>
+<button data-full="img/downpour/01_hero.webp"><img src="img/downpour/01_hero_thumb.webp" alt="Downpour hero street" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/downpour/02_before_after.webp"><img src="img/downpour/02_before_after_thumb.webp" alt="Dry and wet, before and after" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/downpour/04_puddles.webp"><img src="img/downpour/04_puddles_thumb.webp" alt="Puddles with ripples" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/downpour/07_running_drops.webp"><img src="img/downpour/07_running_drops_thumb.webp" alt="Running drops" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/downpour/09_glass.webp"><img src="img/downpour/09_glass_thumb.webp" alt="Drops on glass" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/downpour/11_shelter.webp"><img src="img/downpour/11_shelter_thumb.webp" alt="Dry under shelter" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/downpour/14_lightning.webp"><img src="img/downpour/14_lightning_thumb.webp" alt="Lightning" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/downpour/19_presets.webp"><img src="img/downpour/19_presets_thumb.webp" alt="Weather presets" loading="lazy" decoding="async" width="640" height="360"></button>
     </div>
   </div>
 </section>
@@ -102,7 +101,7 @@
     <div class="sec-head"><div><div class="kicker">More from Jamzey St.</div><h2>Other assets</h2></div></div>
     <div class="cards">
 <a class="card" href="frostfall.html">
-  <div class="shot"><img src="img/frostfall/card.jpg" alt="Frostfall" loading="lazy" width="960" height="540"></div>
+  <div class="shot"><img src="img/frostfall/card.webp" alt="Frostfall" loading="lazy" decoding="async" width="960" height="540"></div>
   <div class="body">
     <div class="chips"><span class="chip on">HDRP</span><span class="chip">URP</span></div>
     <h3>Frostfall</h3>
@@ -111,7 +110,7 @@
     <span class="more">View asset →</span>
   </div>
 </a><a class="card" href="carve.html">
-  <div class="shot"><img src="img/carve/card.jpg" alt="Carve" loading="lazy" width="960" height="540"></div>
+  <div class="shot"><img src="img/carve/card.webp" alt="Carve" loading="lazy" decoding="async" width="960" height="540"></div>
   <div class="body">
     <div class="chips"><span class="chip on">HDRP</span><span class="chip on">URP</span></div>
     <h3>Carve</h3>
@@ -120,7 +119,7 @@
     <span class="more">View asset →</span>
   </div>
 </a><a class="card" href="editor-customizer.html">
-  <div class="shot"><span class="status">Coming soon</span><img src="img/editor-customizer/card.jpg" alt="Editor Customizer" loading="lazy" width="960" height="540"></div>
+  <div class="shot"><span class="status">Coming soon</span><img src="img/editor-customizer/card.webp" alt="Editor Customizer" loading="lazy" decoding="async" width="960" height="540"></div>
   <div class="body">
     <div class="chips"><span class="chip on">Built-in</span><span class="chip on">URP</span><span class="chip on">HDRP</span></div>
     <h3>Editor Customizer</h3>
@@ -143,7 +142,7 @@
 <footer>
   <div class="wrap">
     <div>
-      <a class="brand" href="index.html"><img src="img/mark.png" alt="" width="28" height="34">Jamzey St.</a>
+      <a class="brand" href="index.html"><img src="img/mark.webp" alt="" width="28" height="34" decoding="async">Jamzey St.</a>
       <p class="blurb">Weather, surface and VFX tools for Unity. Built and tested in Unity 6.</p>
     </div>
     <div>
@@ -162,7 +161,7 @@
     <p class="fine">© 2026 Jamzey St. Unity is a trademark of Unity Technologies; this site is not affiliated with Unity.</p>
   </div>
 </footer>
-<script src="js/site.js?v=7f3d1b12"></script>
-<script src="js/grid.js?v=7f3d1b12"></script>
+<script src="js/site.js?v=65f559f1"></script>
+<script src="js/grid.js?v=65f559f1"></script>
 </body>
 </html>

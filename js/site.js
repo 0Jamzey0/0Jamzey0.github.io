@@ -1,10 +1,24 @@
-document.querySelector(".menu-btn")?.addEventListener("click", e => {
-  const nav = document.querySelector(".nav");
-  e.currentTarget.setAttribute("aria-expanded", nav.classList.toggle("open"));
+const nav = document.querySelector(".nav"), menuBtn = document.querySelector(".menu-btn");
+menuBtn?.addEventListener("click", () => {
+  menuBtn.setAttribute("aria-expanded", nav.classList.toggle("open"));
+});
+nav?.addEventListener("click", e => {
+  if (e.target.closest("a")) { nav.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); }
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && nav?.classList.contains("open")) { nav.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); menuBtn.focus(); }
 });
 
-document.querySelectorAll(".yt").forEach(btn => {
-  btn.style.backgroundImage = `url(https://i.ytimg.com/vi/${btn.dataset.id}/hqdefault.jpg)`;
+// YouTube thumbnails load only when they get near the viewport
+const thumbs = document.querySelectorAll(".yt");
+const loadThumb = btn => { btn.style.backgroundImage = `url(https://i.ytimg.com/vi/${btn.dataset.id}/hqdefault.jpg)`; };
+if ("IntersectionObserver" in window) {
+  const io = new IntersectionObserver(es => es.forEach(en => {
+    if (en.isIntersecting) { loadThumb(en.target); io.unobserve(en.target); }
+  }), { rootMargin: "300px" });
+  thumbs.forEach(b => io.observe(b));
+} else thumbs.forEach(loadThumb);
+thumbs.forEach(btn => {
   btn.addEventListener("click", () => {
     const frame = document.createElement("div");
     frame.className = "yt-frame";

@@ -14,15 +14,14 @@
 <meta name="theme-color" content="#E9E7DA">
 <script>try{if(localStorage.getItem("theme")==="dark"){document.documentElement.dataset.theme="dark";document.querySelector('meta[name="theme-color"]').content="#141312"}}catch(e){}</script>
 <link rel="icon" href="favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=7f3d1b12">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css?v=65f559f1">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="index.html"><img src="img/mark.png" alt="" width="28" height="34">Jamzey St.</a>
+    <a class="brand" href="index.html"><img src="img/mark.webp" alt="" width="28" height="34" decoding="async">Jamzey St.</a>
     <button class="menu-btn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="nav">
       <a href="index.html#assets">Assets</a>
@@ -42,7 +41,7 @@
   </div>
 </header>
 
-<main>
+<main id="main">
 <section class="p-hero">
   <div class="wrap">
     <div>
@@ -56,7 +55,7 @@
         <a class="btn btn-ghost" href="#video">Watch the trailer</a>
       </div>
     </div>
-    <div class="shot"><img src="img/editor-customizer/01_make_it_yours.jpg" alt="Editor Customizer – Themes, Hierarchy, Toolbar &amp; Editor Health" width="1600" height="900"></div>
+    <div class="shot"><img src="img/editor-customizer/01_make_it_yours.webp" alt="Editor Customizer – Themes, Hierarchy, Toolbar &amp; Editor Health" width="1600" height="900" fetchpriority="high" decoding="async"></div>
   </div>
 </section>
 
@@ -64,7 +63,7 @@
   <div class="wrap">
     <div class="sec-head"><div><div class="kicker">Video</div><h2>Editor Customizer <em>in motion</em></h2></div></div>
     <div class="videos one">
-<figure class="video"><div class="yt-frame"><video controls preload="none" playsinline poster="img/editor-customizer/card.jpg" aria-label="Editor Customizer trailer"><source src="video/editor-customizer-trailer.mp4" type="video/mp4"></video></div><figcaption>Editor Customizer trailer<small>Themes, Hierarchy, toolbar &amp; Editor Health</small></figcaption></figure>
+<figure class="video"><div class="yt-frame"><video controls preload="none" playsinline poster="img/editor-customizer/card.webp" aria-label="Editor Customizer trailer"><source src="video/editor-customizer-trailer.mp4" type="video/mp4"></video></div><figcaption>Editor Customizer trailer<small>Themes, Hierarchy, toolbar &amp; Editor Health</small></figcaption></figure>
     </div>
   </div>
 </section>
@@ -82,7 +81,7 @@
   <div class="wrap">
     <div class="sec-head"><div><div class="kicker">Gallery</div><h2>Screenshots</h2></div><p>Click any shot to view it full size.</p></div>
     <div class="gallery">
-<button data-full="img/editor-customizer/01_make_it_yours.jpg"><img src="img/editor-customizer/01_make_it_yours_thumb.jpg" alt="Editor Customizer versus Unity&#x27;s default look" loading="lazy" width="640" height="360"></button><button data-full="img/editor-customizer/02_one_window.jpg"><img src="img/editor-customizer/02_one_window_thumb.jpg" alt="One window for every module" loading="lazy" width="640" height="360"></button><button data-full="img/editor-customizer/03_themes.jpg"><img src="img/editor-customizer/03_themes_thumb.jpg" alt="Editor themes" loading="lazy" width="640" height="360"></button><button data-full="img/editor-customizer/04_hierarchy.jpg"><img src="img/editor-customizer/04_hierarchy_thumb.jpg" alt="Hierarchy styling" loading="lazy" width="640" height="360"></button><button data-full="img/editor-customizer/05_project.jpg"><img src="img/editor-customizer/05_project_thumb.jpg" alt="Project folder colours" loading="lazy" width="640" height="360"></button><button data-full="img/editor-customizer/06_quick_actions.jpg"><img src="img/editor-customizer/06_quick_actions_thumb.jpg" alt="Toolbar and quick actions" loading="lazy" width="640" height="360"></button><button data-full="img/editor-customizer/07_editor_health.jpg"><img src="img/editor-customizer/07_editor_health_thumb.jpg" alt="Editor Health" loading="lazy" width="640" height="360"></button><button data-full="img/editor-customizer/08_guided_tour.jpg"><img src="img/editor-customizer/08_guided_tour_thumb.jpg" alt="Guided tour in the demo scene" loading="lazy" width="640" height="360"></button>
+<button data-full="img/editor-customizer/01_make_it_yours.webp"><img src="img/editor-customizer/01_make_it_yours_thumb.webp" alt="Editor Customizer versus Unity&#x27;s default look" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/editor-customizer/02_one_window.webp"><img src="img/editor-customizer/02_one_window_thumb.webp" alt="One window for every module" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/editor-customizer/03_themes.webp"><img src="img/editor-customizer/03_themes_thumb.webp" alt="Editor themes" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/editor-customizer/04_hierarchy.webp"><img src="img/editor-customizer/04_hierarchy_thumb.webp" alt="Hierarchy styling" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/editor-customizer/05_project.webp"><img src="img/editor-customizer/05_project_thumb.webp" alt="Project folder colours" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/editor-customizer/06_quick_actions.webp"><img src="img/editor-customizer/06_quick_actions_thumb.webp" alt="Toolbar and quick actions" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/editor-customizer/07_editor_health.webp"><img src="img/editor-customizer/07_editor_health_thumb.webp" alt="Editor Health" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/editor-customizer/08_guided_tour.webp"><img src="img/editor-customizer/08_guided_tour_thumb.webp" alt="Guided tour in the demo scene" loading="lazy" decoding="async" width="640" height="360"></button>
     </div>
   </div>
 </section>
@@ -102,7 +101,7 @@
     <div class="sec-head"><div><div class="kicker">More from Jamzey St.</div><h2>Other assets</h2></div></div>
     <div class="cards">
 <a class="card" href="frostfall.html">
-  <div class="shot"><img src="img/frostfall/card.jpg" alt="Frostfall" loading="lazy" width="960" height="540"></div>
+  <div class="shot"><img src="img/frostfall/card.webp" alt="Frostfall" loading="lazy" decoding="async" width="960" height="540"></div>
   <div class="body">
     <div class="chips"><span class="chip on">HDRP</span><span class="chip">URP</span></div>
     <h3>Frostfall</h3>
@@ -111,7 +110,7 @@
     <span class="more">View asset →</span>
   </div>
 </a><a class="card" href="downpour.html">
-  <div class="shot"><img src="img/downpour/card.jpg" alt="Downpour" loading="lazy" width="960" height="540"></div>
+  <div class="shot"><img src="img/downpour/card.webp" alt="Downpour" loading="lazy" decoding="async" width="960" height="540"></div>
   <div class="body">
     <div class="chips"><span class="chip on">HDRP</span><span class="chip">URP</span></div>
     <h3>Downpour</h3>
@@ -120,7 +119,7 @@
     <span class="more">View asset →</span>
   </div>
 </a><a class="card" href="carve.html">
-  <div class="shot"><img src="img/carve/card.jpg" alt="Carve" loading="lazy" width="960" height="540"></div>
+  <div class="shot"><img src="img/carve/card.webp" alt="Carve" loading="lazy" decoding="async" width="960" height="540"></div>
   <div class="body">
     <div class="chips"><span class="chip on">HDRP</span><span class="chip on">URP</span></div>
     <h3>Carve</h3>
@@ -143,7 +142,7 @@
 <footer>
   <div class="wrap">
     <div>
-      <a class="brand" href="index.html"><img src="img/mark.png" alt="" width="28" height="34">Jamzey St.</a>
+      <a class="brand" href="index.html"><img src="img/mark.webp" alt="" width="28" height="34" decoding="async">Jamzey St.</a>
       <p class="blurb">Weather, surface and VFX tools for Unity. Built and tested in Unity 6.</p>
     </div>
     <div>
@@ -162,7 +161,7 @@
     <p class="fine">© 2026 Jamzey St. Unity is a trademark of Unity Technologies; this site is not affiliated with Unity.</p>
   </div>
 </footer>
-<script src="js/site.js?v=7f3d1b12"></script>
-<script src="js/grid.js?v=7f3d1b12"></script>
+<script src="js/site.js?v=65f559f1"></script>
+<script src="js/grid.js?v=65f559f1"></script>
 </body>
 </html>

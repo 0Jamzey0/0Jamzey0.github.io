@@ -116,10 +116,15 @@
       draw();
     };
     resize();
-    new ResizeObserver(resize).observe(host);
+    let rt = 0, lastW = W;
+    new ResizeObserver(() => {
+      if (host.clientWidth === lastW && host.clientHeight === H) return;   // ignore no-op changes (mobile URL bar)
+      lastW = host.clientWidth; clearTimeout(rt); rt = setTimeout(resize, 120);
+    }).observe(host);
 
     if (still) return;
     host.addEventListener("pointermove", e => {
+      if (e.pointerType === "touch") return;   // no hover on touch screens: skip the animation entirely
       const r = host.getBoundingClientRect();
       target.x = e.clientX - r.left; target.y = e.clientY - r.top;
       if (cur.s < .01) { cur.x = target.x; cur.y = target.y; }

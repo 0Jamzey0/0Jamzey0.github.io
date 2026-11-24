@@ -1,4 +1,4 @@
-"""Generates index.html and one page per asset. Edit the data below, then: python tools/build.py"""
+﻿"""Generates index.html and one page per asset. Edit the data below, then: python tools/build.py"""
 import hashlib, os
 from html import escape
 
@@ -209,15 +209,14 @@ def head(title, desc, path=""):
 <meta name="theme-color" content="#E9E7DA">
 <script>try{{if(localStorage.getItem("theme")==="dark"){{document.documentElement.dataset.theme="dark";document.querySelector('meta[name="theme-color"]').content="#141312"}}}}catch(e){{}}</script>
 <link rel="icon" href="favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css?v={VER}">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="index.html"><img src="img/mark.png" alt="" width="28" height="34">Jamzey St.</a>
+    <a class="brand" href="index.html"><img src="img/mark.webp" alt="" width="28" height="34" decoding="async">Jamzey St.</a>
     <button class="menu-btn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="nav">
       <a href="index.html#assets">Assets</a>
@@ -241,7 +240,7 @@ def head(title, desc, path=""):
 FOOT = f"""<footer>
   <div class="wrap">
     <div>
-      <a class="brand" href="index.html"><img src="img/mark.png" alt="" width="28" height="34">Jamzey St.</a>
+      <a class="brand" href="index.html"><img src="img/mark.webp" alt="" width="28" height="34" decoding="async">Jamzey St.</a>
       <p class="blurb">Weather, surface and VFX tools for Unity. Built and tested in Unity 6.</p>
     </div>
     <div>
@@ -269,7 +268,7 @@ FOOT = f"""<footer>
 def video(vid, title, note):
     cap = f'<figcaption>{escape(title)}<small>{escape(note)}</small></figcaption>'
     if vid.endswith(".mp4"):
-        poster = "img/" + vid.split("/")[1].replace("-trailer.mp4", "") + "/card.jpg"
+        poster = "img/" + vid.split("/")[1].replace("-trailer.mp4", "") + "/card.webp"
         return (f'<figure class="video"><div class="yt-frame"><video controls preload="none" playsinline '
                 f'poster="{poster}" aria-label="{escape(title)}"><source src="{vid}" type="video/mp4"></video></div>{cap}</figure>')
     return (f'<figure class="video"><button class="yt" data-id="{vid}" aria-label="Play {escape(title)}">'
@@ -277,7 +276,7 @@ def video(vid, title, note):
 
 def card(a):
     return f"""<a class="card" href="{a['slug']}.html">
-  <div class="shot">{f'<span class="status">{a["status"]}</span>' if a.get("status") else ""}<img src="img/{a['slug']}/card.jpg" alt="{a['name']}" loading="lazy" width="960" height="540"></div>
+  <div class="shot">{f'<span class="status">{a["status"]}</span>' if a.get("status") else ""}<img src="img/{a['slug']}/card.webp" alt="{a['name']}" loading="lazy" decoding="async" width="960" height="540"></div>
   <div class="body">
     {chips(a)}
     <h3>{a['name']}</h3>
@@ -304,10 +303,10 @@ def index():
     return head("Jamzey St. · Weather, surfaces & VFX for Unity",
                 "Drop-in environment tools for Unity: deformable snow, rain and wet surfaces, and silhouette "
                 "parallax occlusion mapping for HDRP and URP.") + f"""
-<main>
+<main id="main">
 <section class="hero">
-  <img class="blocks blocks-left" src="img/blocks-left.svg" alt="">
-  <img class="blocks blocks-right" src="img/blocks-right.svg" alt="">
+  <img class="blocks blocks-left" src="img/blocks-left.svg" alt="" width="345" height="274" decoding="async">
+  <img class="blocks blocks-right" src="img/blocks-right.svg" alt="" width="566" height="562" decoding="async">
   <div class="wrap">
     <span class="eyebrow">Jamzey St.</span>
     <h1>Weather, surfaces <em>&amp;</em> VFX</h1>
@@ -402,7 +401,7 @@ def product(a):
     others = [o for o in ASSETS if o is not a]
     return head(f"{a['name']} · {a['sub']} · Jamzey St.", a["tag"] + " " + a["lead"][:120],
                 f"{a['slug']}.html") + f"""
-<main>
+<main id="main">
 <section class="p-hero">
   <div class="wrap">
     <div>
@@ -416,7 +415,7 @@ def product(a):
         <a class="btn btn-ghost" href="#video">Watch the trailer</a>
       </div>
     </div>
-    <div class="shot"><img src="img/{a['slug']}/{a.get('hero', a['gallery'][0][0])}.jpg" alt="{escape(a['name'] + ' – ' + a['sub'])}" width="1600" height="900"></div>
+    <div class="shot"><img src="img/{a['slug']}/{a.get('hero', a['gallery'][0][0])}.webp" alt="{escape(a['name'] + ' – ' + a['sub'])}" width="1600" height="900" fetchpriority="high" decoding="async"></div>
   </div>
 </section>
 
@@ -442,7 +441,7 @@ def product(a):
   <div class="wrap">
     <div class="sec-head"><div><div class="kicker">Gallery</div><h2>Screenshots</h2></div><p>Click any shot to view it full size.</p></div>
     <div class="gallery">
-{"".join(f'<button data-full="img/{a["slug"]}/{f}.jpg"><img src="img/{a["slug"]}/{f}_thumb.jpg" alt="{escape(alt)}" loading="lazy" width="640" height="360"></button>' for f, alt in a['gallery'])}
+{"".join(f'<button data-full="img/{a["slug"]}/{f}.webp"><img src="img/{a["slug"]}/{f}_thumb.webp" alt="{escape(alt)}" loading="lazy" decoding="async" width="640" height="360"></button>' for f, alt in a['gallery'])}
     </div>
   </div>
 </section>

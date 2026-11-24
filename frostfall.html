@@ -14,15 +14,14 @@
 <meta name="theme-color" content="#E9E7DA">
 <script>try{if(localStorage.getItem("theme")==="dark"){document.documentElement.dataset.theme="dark";document.querySelector('meta[name="theme-color"]').content="#141312"}}catch(e){}</script>
 <link rel="icon" href="favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=7f3d1b12">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css?v=65f559f1">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="index.html"><img src="img/mark.png" alt="" width="28" height="34">Jamzey St.</a>
+    <a class="brand" href="index.html"><img src="img/mark.webp" alt="" width="28" height="34" decoding="async">Jamzey St.</a>
     <button class="menu-btn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="nav">
       <a href="index.html#assets">Assets</a>
@@ -42,7 +41,7 @@
   </div>
 </header>
 
-<main>
+<main id="main">
 <section class="p-hero">
   <div class="wrap">
     <div>
@@ -56,7 +55,7 @@
         <a class="btn btn-ghost" href="#video">Watch the trailer</a>
       </div>
     </div>
-    <div class="shot"><img src="img/frostfall/thumbnail.jpg" alt="Frostfall – Deformable Snow for HDRP" width="1600" height="900"></div>
+    <div class="shot"><img src="img/frostfall/thumbnail.webp" alt="Frostfall – Deformable Snow for HDRP" width="1600" height="900" fetchpriority="high" decoding="async"></div>
   </div>
 </section>
 
@@ -82,7 +81,7 @@
   <div class="wrap">
     <div class="sec-head"><div><div class="kicker">Gallery</div><h2>Screenshots</h2></div><p>Click any shot to view it full size.</p></div>
     <div class="gallery">
-<button data-full="img/frostfall/01_hero.jpg"><img src="img/frostfall/01_hero_thumb.jpg" alt="Frostfall hero scene" loading="lazy" width="640" height="360"></button><button data-full="img/frostfall/02_footprints.jpg"><img src="img/frostfall/02_footprints_thumb.jpg" alt="Footprints in fresh powder" loading="lazy" width="640" height="360"></button><button data-full="img/frostfall/03_overlay_before_after.jpg"><img src="img/frostfall/03_overlay_before_after_thumb.jpg" alt="Snow overlay before and after" loading="lazy" width="640" height="360"></button><button data-full="img/frostfall/04_trench.jpg"><img src="img/frostfall/04_trench_thumb.jpg" alt="Vehicle trench with berms" loading="lazy" width="640" height="360"></button><button data-full="img/frostfall/05_shelter.jpg"><img src="img/frostfall/05_shelter_thumb.jpg" alt="Sheltered ground under roofs" loading="lazy" width="640" height="360"></button><button data-full="img/frostfall/06_calm_to_blizzard.jpg"><img src="img/frostfall/06_calm_to_blizzard_thumb.jpg" alt="Calm to blizzard" loading="lazy" width="640" height="360"></button><button data-full="img/frostfall/10_wind_driven_snow.jpg"><img src="img/frostfall/10_wind_driven_snow_thumb.jpg" alt="Wind-driven snow" loading="lazy" width="640" height="360"></button><button data-full="img/frostfall/14_presets.jpg"><img src="img/frostfall/14_presets_thumb.jpg" alt="Snow presets" loading="lazy" width="640" height="360"></button>
+<button data-full="img/frostfall/01_hero.webp"><img src="img/frostfall/01_hero_thumb.webp" alt="Frostfall hero scene" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/frostfall/02_footprints.webp"><img src="img/frostfall/02_footprints_thumb.webp" alt="Footprints in fresh powder" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/frostfall/03_overlay_before_after.webp"><img src="img/frostfall/03_overlay_before_after_thumb.webp" alt="Snow overlay before and after" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/frostfall/04_trench.webp"><img src="img/frostfall/04_trench_thumb.webp" alt="Vehicle trench with berms" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/frostfall/05_shelter.webp"><img src="img/frostfall/05_shelter_thumb.webp" alt="Sheltered ground under roofs" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/frostfall/06_calm_to_blizzard.webp"><img src="img/frostfall/06_calm_to_blizzard_thumb.webp" alt="Calm to blizzard" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/frostfall/10_wind_driven_snow.webp"><img src="img/frostfall/10_wind_driven_snow_thumb.webp" alt="Wind-driven snow" loading="lazy" decoding="async" width="640" height="360"></button><button data-full="img/frostfall/14_presets.webp"><img src="img/frostfall/14_presets_thumb.webp" alt="Snow presets" loading="lazy" decoding="async" width="640" height="360"></button>
     </div>
   </div>
 </section>
@@ -102,7 +101,7 @@
     <div class="sec-head"><div><div class="kicker">More from Jamzey St.</div><h2>Other assets</h2></div></div>
     <div class="cards">
 <a class="card" href="downpour.html">
-  <div class="shot"><img src="img/downpour/card.jpg" alt="Downpour" loading="lazy" width="960" height="540"></div>
+  <div class="shot"><img src="img/downpour/card.webp" alt="Downpour" loading="lazy" decoding="async" width="960" height="540"></div>
   <div class="body">
     <div class="chips"><span class="chip on">HDRP</span><span class="chip">URP</span></div>
     <h3>Downpour</h3>
@@ -111,7 +110,7 @@
     <span class="more">View asset →</span>
   </div>
 </a><a class="card" href="carve.html">
-  <div class="shot"><img src="img/carve/card.jpg" alt="Carve" loading="lazy" width="960" height="540"></div>
+  <div class="shot"><img src="img/carve/card.webp" alt="Carve" loading="lazy" decoding="async" width="960" height="540"></div>
   <div class="body">
     <div class="chips"><span class="chip on">HDRP</span><span class="chip on">URP</span></div>
     <h3>Carve</h3>
@@ -120,7 +119,7 @@
     <span class="more">View asset →</span>
   </div>
 </a><a class="card" href="editor-customizer.html">
-  <div class="shot"><span class="status">Coming soon</span><img src="img/editor-customizer/card.jpg" alt="Editor Customizer" loading="lazy" width="960" height="540"></div>
+  <div class="shot"><span class="status">Coming soon</span><img src="img/editor-customizer/card.webp" alt="Editor Customizer" loading="lazy" decoding="async" width="960" height="540"></div>
   <div class="body">
     <div class="chips"><span class="chip on">Built-in</span><span class="chip on">URP</span><span class="chip on">HDRP</span></div>
     <h3>Editor Customizer</h3>
@@ -143,7 +142,7 @@
 <footer>
   <div class="wrap">
     <div>
-      <a class="brand" href="index.html"><img src="img/mark.png" alt="" width="28" height="34">Jamzey St.</a>
+      <a class="brand" href="index.html"><img src="img/mark.webp" alt="" width="28" height="34" decoding="async">Jamzey St.</a>
       <p class="blurb">Weather, surface and VFX tools for Unity. Built and tested in Unity 6.</p>
     </div>
     <div>
@@ -162,7 +161,7 @@
     <p class="fine">© 2026 Jamzey St. Unity is a trademark of Unity Technologies; this site is not affiliated with Unity.</p>
   </div>
 </footer>
-<script src="js/site.js?v=7f3d1b12"></script>
-<script src="js/grid.js?v=7f3d1b12"></script>
+<script src="js/site.js?v=65f559f1"></script>
+<script src="js/grid.js?v=65f559f1"></script>
 </body>
 </html>
