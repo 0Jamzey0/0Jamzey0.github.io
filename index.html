@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jamzey St. · Weather, surfaces &amp; VFX for Unity</title>
-<meta name="description" content="Drop-in environment tools for Unity: deformable snow, rain and wet surfaces, and silhouette parallax occlusion mapping for HDRP and URP.">
+<meta name="description" content="Drop-in environment tools for Unity: deformable snow, rain and wet surfaces, spreading fire, and silhouette parallax occlusion mapping for HDRP and URP.">
 <meta property="og:title" content="Jamzey St. · Weather, surfaces &amp; VFX for Unity">
-<meta property="og:description" content="Drop-in environment tools for Unity: deformable snow, rain and wet surfaces, and silhouette parallax occlusion mapping for HDRP and URP.">
+<meta property="og:description" content="Drop-in environment tools for Unity: deformable snow, rain and wet surfaces, spreading fire, and silhouette parallax occlusion mapping for HDRP and URP.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://0jamzey0.github.io/">
 <meta property="og:image" content="https://0jamzey0.github.io/img/social.jpg">
@@ -15,7 +15,7 @@
 <script>try{if(localStorage.getItem("theme")==="dark"){document.documentElement.dataset.theme="dark";document.querySelector('meta[name="theme-color"]').content="#141312"}}catch(e){}</script>
 <link rel="icon" href="favicon.png">
 <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/style.css?v=65f559f1">
+<link rel="stylesheet" href="css/style.css?v=8019efc3">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -49,7 +49,7 @@
     <span class="eyebrow">Jamzey St.</span>
     <h1>Weather, surfaces <em>&amp;</em> VFX</h1>
     <p class="lead">Drop-in environment tools for Unity. Snow that takes footprints, rain that soaks every surface,
-      and relief with real depth, all working on any shader with no material changes.</p>
+      fire that spreads and chars, and relief with real depth, all working on any shader with no material changes.</p>
     <div class="cta">
       <a class="btn btn-primary" href="#assets">Browse assets</a>
       <a class="btn btn-ghost" href="#videos">Watch the trailers</a>
@@ -57,7 +57,7 @@
   </div>
 </section>
 <div class="facts">
-  <span>3 assets on the Unity Asset Store</span>
+  <span>4 assets on the Unity Asset Store</span>
   <span>Built for Unity 6</span>
   <span>HDRP &amp; URP</span>
   <span>Demo scenes + full documentation</span>
@@ -83,9 +83,9 @@
 </a><a class="card" href="downpour.html">
   <div class="shot"><img src="img/downpour/card.webp" alt="Downpour" loading="lazy" decoding="async" width="960" height="540"></div>
   <div class="body">
-    <div class="chips"><span class="chip on">HDRP</span><span class="chip">URP</span></div>
+    <div class="chips"><span class="chip on">HDRP</span><span class="chip on">URP</span></div>
     <h3>Downpour</h3>
-    <span class="tag">Rain &amp; Wet Surfaces for HDRP</span>
+    <span class="tag">Rain &amp; Wet Surfaces for HDRP &amp; URP</span>
     <p>Rain-soaked scenes without touching a single material.</p>
     <span class="more">View asset →</span>
   </div>
@@ -96,6 +96,15 @@
     <h3>Carve</h3>
     <span class="tag">Silhouette Parallax Occlusion Mapping for HDRP &amp; URP</span>
     <p>Real depth on flat surfaces, with carved outlines and true intersections.</p>
+    <span class="more">View asset →</span>
+  </div>
+</a><a class="card" href="scorch.html">
+  <div class="shot"><img src="img/scorch/card.webp" alt="Scorch" loading="lazy" decoding="async" width="960" height="540"></div>
+  <div class="body">
+    <div class="chips"><span class="chip on">HDRP</span><span class="chip">URP</span></div>
+    <h3>Scorch</h3>
+    <span class="tag">Dynamic Fire &amp; Burn System for HDRP</span>
+    <p>Fire that spreads, chars and burns through any object, without changing its materials.</p>
     <span class="more">View asset →</span>
   </div>
 </a><a class="card" href="editor-customizer.html">
@@ -116,15 +125,16 @@
   <div class="wrap">
     <div class="sec-head">
       <div><div class="kicker">In the workshop</div><h2>Coming <em>next</em></h2></div>
-      <p>Fire, sand and autumn leaves are on the bench. Patreon members see them first.</p>
+      <p>Sand and autumn leaves are on the bench, next to P_Zenos, my own action-adventure project. Patreon members
+        see them first.</p>
     </div>
     <div class="cards">
-<a class="card soon scorch" href="https://www.patreon.com/cw/JamzeyDev" target="_blank" rel="noopener">
-  <div class="shot teaser"><span class="status">Coming soon</span><strong>Scorch</strong></div>
+<a class="card soon pzenos" href="https://www.patreon.com/cw/JamzeyDev" target="_blank" rel="noopener">
+  <div class="shot teaser"><span class="status">Patreon project</span><strong>P_Zenos</strong></div>
   <div class="body">
     <div class="chips"><span class="chip on">HDRP</span><span class="chip">URP</span></div>
-    <span class="tag">Dynamic Fire &amp; Burn System for HDRP</span>
-    <p>Fire that spreads, chars and burns through any object, without changing its materials.</p>
+    <span class="tag">Third-person action-adventure project for Unity HDRP</span>
+    <p>My own cinematic action-adventure game and framework for Unity, with its own original mechanics. Devlogs and updates on Patreon.</p>
     <span class="more">Follow progress on Patreon →</span>
   </div>
 </a><a class="card soon dustfall" href="https://www.patreon.com/cw/JamzeyDev" target="_blank" rel="noopener">
@@ -155,7 +165,7 @@
       <p>Trailers and update videos, captured in real time in Unity.</p>
     </div>
     <div class="videos lead-wide">
-<figure class="video"><div class="yt-frame"><video controls preload="none" playsinline poster="img/editor-customizer/card.webp" aria-label="Editor Customizer trailer"><source src="video/editor-customizer-trailer.mp4" type="video/mp4"></video></div><figcaption>Editor Customizer trailer<small>Themes, Hierarchy, toolbar &amp; Editor Health</small></figcaption></figure><figure class="video"><button class="yt" data-id="mgwcO4EGvC0" aria-label="Play Frostfall trailer"><span class="play"></span></button><figcaption>Frostfall trailer<small>Footprints, snow on any object &amp; weather</small></figcaption></figure><figure class="video"><button class="yt" data-id="962PG-I17fs" aria-label="Play Frostfall 1.1 update"><span class="play"></span></button><figcaption>Frostfall 1.1 update<small>Blizzards, lens frost &amp; snow audio</small></figcaption></figure><figure class="video"><button class="yt" data-id="Shq2jn_EiPQ" aria-label="Play Downpour trailer"><span class="play"></span></button><figcaption>Downpour trailer<small>Rain &amp; wet surfaces for HDRP</small></figcaption></figure><figure class="video"><button class="yt" data-id="LmxFYLq_1uU" aria-label="Play Carve trailer"><span class="play"></span></button><figcaption>Carve trailer<small>Silhouette POM for HDRP &amp; URP</small></figcaption></figure>
+<figure class="video"><div class="yt-frame"><video controls preload="none" playsinline poster="img/editor-customizer/card.webp" aria-label="Editor Customizer trailer"><source src="video/editor-customizer-trailer.mp4" type="video/mp4"></video></div><figcaption>Editor Customizer trailer<small>Themes, Hierarchy, toolbar &amp; Editor Health</small></figcaption></figure><figure class="video"><button class="yt" data-id="mgwcO4EGvC0" aria-label="Play Frostfall trailer"><span class="play"></span></button><figcaption>Frostfall trailer<small>Footprints, snow on any object &amp; weather</small></figcaption></figure><figure class="video"><button class="yt" data-id="Shq2jn_EiPQ" aria-label="Play Downpour trailer"><span class="play"></span></button><figcaption>Downpour trailer<small>Rain &amp; wet surfaces for HDRP</small></figcaption></figure><figure class="video"><button class="yt" data-id="LmxFYLq_1uU" aria-label="Play Carve trailer"><span class="play"></span></button><figcaption>Carve trailer<small>Silhouette POM for HDRP &amp; URP</small></figcaption></figure><figure class="video"><button class="yt" data-id="wIvYNtdIUYg" aria-label="Play Scorch trailer"><span class="play"></span></button><figcaption>Scorch trailer<small>Dynamic fire &amp; burn system for HDRP</small></figcaption></figure>
     </div>
     <div class="channel"><a class="btn btn-ghost" href="https://www.youtube.com/@Jamzey-Dev" target="_blank" rel="noopener">Visit the YouTube channel</a></div>
   </div>
@@ -167,7 +177,7 @@
       <div class="kicker">About</div>
       <h2>Making worlds feel <em>alive</em></h2>
       <p>Jamzey St. is an independent studio making environment tools for Unity: snow that piles up and takes
-        footprints, rain that soaks surfaces, and surfaces with real depth.</p>
+        footprints, rain that soaks surfaces, fire that spreads and chars, and surfaces with real depth.</p>
       <p>Every package is built and tested in Unity 6, uses its own original textures, meshes and shaders, and is
         designed to work with the scenes and shaders you already have.</p>
     </div>
@@ -184,7 +194,7 @@
   <div class="wrap">
     <div>
       <h2>Follow what's next</h2>
-      <p>Work-in-progress builds, behind-the-scenes breakdowns and early looks at upcoming assets.</p>
+      <p>P_Zenos devlogs, work-in-progress builds, behind-the-scenes breakdowns and early looks at upcoming assets.</p>
     </div>
     <div class="cta" style="display:flex;gap:12px;flex-wrap:wrap">
       <a class="btn" href="https://www.patreon.com/cw/JamzeyDev" target="_blank" rel="noopener">Join on Patreon</a>
@@ -201,21 +211,19 @@
     </div>
     <div>
       <h4>Assets</h4>
-      <ul><li><a href="frostfall.html">Frostfall</a></li><li><a href="downpour.html">Downpour</a></li><li><a href="carve.html">Carve</a></li><li><a href="editor-customizer.html">Editor Customizer</a></li></ul>
+      <ul><li><a href="frostfall.html">Frostfall</a></li><li><a href="downpour.html">Downpour</a></li><li><a href="carve.html">Carve</a></li><li><a href="scorch.html">Scorch</a></li><li><a href="editor-customizer.html">Editor Customizer</a></li></ul>
     </div>
     <div>
       <h4>Find me</h4>
       <ul>
-        <li><a href="https://assetstore.unity.com/publishers/100637" target="_blank" rel="noopener">Unity Asset Store</a></li>
-        <li><a href="https://www.youtube.com/@Jamzey-Dev" target="_blank" rel="noopener">YouTube</a></li>
-        <li><a href="https://www.patreon.com/cw/JamzeyDev" target="_blank" rel="noopener">Patreon</a></li>
+        <li><a href="https://assetstore.unity.com/publishers/100637" target="_blank" rel="noopener">Unity Asset Store</a></li><li><a href="https://www.fab.com/sellers/Jamzey" target="_blank" rel="noopener">Fab</a></li><li><a href="https://www.youtube.com/@Jamzey-Dev" target="_blank" rel="noopener">YouTube</a></li><li><a href="https://www.patreon.com/cw/JamzeyDev" target="_blank" rel="noopener">Patreon</a></li>
         <li><a href="mailto:jamzeyst@gmail.com">jamzeyst@gmail.com</a></li>
       </ul>
     </div>
     <p class="fine">© 2026 Jamzey St. Unity is a trademark of Unity Technologies; this site is not affiliated with Unity.</p>
   </div>
 </footer>
-<script src="js/site.js?v=65f559f1"></script>
-<script src="js/grid.js?v=65f559f1"></script>
+<script src="js/site.js?v=8019efc3"></script>
+<script src="js/grid.js?v=8019efc3"></script>
 </body>
 </html>

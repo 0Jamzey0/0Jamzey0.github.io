@@ -10,6 +10,19 @@ STORE = "https://assetstore.unity.com/publishers/100637"
 YOUTUBE = "https://www.youtube.com/@Jamzey-Dev"
 PATREON = "https://www.patreon.com/cw/JamzeyDev"
 EMAIL = "jamzeyst@gmail.com"
+FAB = "https://www.fab.com/sellers/Jamzey"
+# Fill these in when they exist. Empty ones are left out of the site.
+ITCH = ""          # e.g. "https://jamzey.itch.io"
+DISCORD = ""       # permanent invite, e.g. "https://discord.gg/xxxx"
+NEWSLETTER = ""    # signup page, e.g. "https://buttondown.com/jamzey"
+GOATCOUNTER = ""   # GoatCounter site code, e.g. "jamzey" for jamzey.goatcounter.com
+
+def ext(href, text, cls=""):
+    c = f' class="{cls}"' if cls else ""
+    return f'<a{c} href="{href}" target="_blank" rel="noopener">{text}</a>'
+
+FIND_ME = [(STORE, "Unity Asset Store"), (FAB, "Fab"), (ITCH, "itch.io"), (YOUTUBE, "YouTube"),
+           (PATREON, "Patreon"), (DISCORD, "Discord"), (NEWSLETTER, "Newsletter")]
 
 ASSETS = [
     dict(
@@ -51,14 +64,20 @@ ASSETS = [
                ("Demo scenes", "Showcase + minimal"), ("Content", "100% original")],
     ),
     dict(
-        slug="downpour", name="Downpour", sub="Rain & Wet Surfaces for HDRP",
-        store="https://assetstore.unity.com/packages/package/415192", version="1.0.0",
-        pipelines=["HDRP"],
+        slug="downpour", name="Downpour", sub="Rain & Wet Surfaces for HDRP & URP",
+        store="https://assetstore.unity.com/packages/package/415192", version="1.1",
+        pipelines=["HDRP", "URP"],
         tag="Rain-soaked scenes without touching a single material.",
-        lead="Streets darken and gloss, puddles fill the low spots, drops run down walls, glass and cars, eaves drip, "
-             "and everything under a roof stays dry. It works through HDRP Custom Passes, so it applies to every "
-             "object whatever shader it uses.",
-        videos=[("Shq2jn_EiPQ", "Downpour trailer", "Rain & wet surfaces for HDRP")],
+        lead="Streets darken and gloss, puddles fill the low spots, water runs down walls and slopes, drops run down "
+             "glass and cars, rain glints in your streetlamps, and everything under a roof stays dry. It works on "
+             "every object whatever shader it uses, in HDRP and URP.",
+        videos=[("Shq2jn_EiPQ", "Downpour trailer", "Rain & wet surfaces for HDRP"),
+                ("Aodo_yMEnO4", "Downpour 1.1 update", "URP, rain lit by local lights & water on slopes")],
+        new=("New in 1.1", ["URP support in Forward, Forward+ and Deferred, set up by the Setup Wizard",
+                            "Rain lit by local lights: drops glint in streetlamps, neon and headlights",
+                            "Water flowing on slopes, gathering into channels along gutters and curbs",
+                            "Wall streams that come and go and start again under every ledge",
+                            "A new editor: live dry/wet preview, forecast strip, scene checks and GPU cost per system"]),
         features=[
             ("Wet surfaces, any shader", ["Porous materials darken, everything turns glossy",
                                           "Water film on level ground and runnels down walls",
@@ -79,23 +98,29 @@ ASSETS = [
                                 "Lightning, lens drops, rain haze and mist",
                                 "5 presets blended at runtime, scripting API and events"]),
         ],
-        gallery=[("01_hero", "Downpour hero street"), ("02_before_after", "Dry and wet, before and after"),
+        gallery=[("01_hero", "Downpour hero street"), ("v11_02_lit_rain", "Rain lit by streetlamps"),
+                 ("v11_05_slope_flow", "Water flowing down a slope"), ("02_before_after", "Dry and wet, before and after"),
                  ("04_puddles", "Puddles with ripples"), ("07_running_drops", "Running drops"),
-                 ("09_glass", "Drops on glass"), ("11_shelter", "Dry under shelter"),
-                 ("14_lightning", "Lightning"), ("19_presets", "Weather presets")],
-        specs=[("Unity", "6.0 LTS or newer"), ("Render pipeline", "HDRP 17.0+"),
-               ("Approach", "Custom Passes, no material changes"), ("Version", "1.0.0"),
+                 ("11_shelter", "Dry under shelter"), ("v11_07_hdrp_urp", "HDRP and URP side by side")],
+        specs=[("Unity", "6.0 LTS or newer"), ("Render pipelines", "HDRP 17.0+ & URP 17.0+"),
+               ("Approach", "No material changes"), ("Version", "1.1"),
                ("Demo scenes", "Showcase street + minimal"), ("Content", "100% original")],
     ),
     dict(
         slug="carve", name="Carve", sub="Silhouette Parallax Occlusion Mapping for HDRP & URP",
-        store="https://assetstore.unity.com/packages/package/418204", version="1.0.0",
+        store="https://assetstore.unity.com/packages/package/418204", version="1.1",
         pipelines=["HDRP", "URP"],
         tag="Real depth on flat surfaces, with carved outlines and true intersections.",
         lead="Parallax occlusion mapping built to hold up where classic POM falls apart: mesh edges are carved into "
              "the shape of the relief, props meet it at its true depth, and light, shadows and reflections follow "
              "every crack. One package for HDRP and URP.",
-        videos=[("LmxFYLq_1uU", "Carve trailer", "Silhouette POM for HDRP & URP")],
+        videos=[("LmxFYLq_1uU", "Carve trailer", "Silhouette POM for HDRP & URP"),
+                ("seBE1ZuqZ9U", "Carve 1.1 update", "Terrain, interiors, Height Fixer & faster anti-tiling")],
+        new=("New in 1.1", ["Carve Terrain: real relief, self-shadows and height-blended borders on Unity Terrain",
+                            "Carve Interior: a furnished room behind every window, with real depth and no extra geometry",
+                            "Height Fixer finds inverted, squashed, seamed or noisy height maps and saves a fixed copy",
+                            "Up to twice as fast with an identical image; Fast anti-tiling saves up to 58% GPU time",
+                            "1.0 materials upgrade themselves when the update imports"]),
         features=[
             ("Real depth, real outlines", ["Carved silhouettes on box and modular edges",
                                            "Bumpy outlines on curved meshes like rocks and columns",
@@ -121,8 +146,46 @@ ASSETS = [
                  ("12_decals", "Carve Decals"), ("14_triplanar", "Triplanar mapping"),
                  ("18_town", "Town built with Carve"), ("24_materials", "Included materials")],
         specs=[("Unity", "6.0 LTS or newer"), ("Render pipelines", "HDRP & URP"),
-               ("Materials", "13 included"), ("Version", "1.0.0"),
+               ("Materials", "13 included"), ("Version", "1.1"),
                ("Demo scenes", "3 per pipeline"), ("Content", "100% original")],
+    ),
+    dict(
+        slug="scorch", name="Scorch", sub="Dynamic Fire & Burn System for HDRP",
+        store="https://assetstore.unity.com/packages/package/421656", version="1.1",
+        pipelines=["HDRP"],
+        tag="Fire that spreads, chars and burns through any object, without changing its materials.",
+        lead="Mark objects as flammable and they catch, burn, char, smoulder and go out. A glowing front crawls "
+             "across each surface, neighbours heat up and catch in turn, and water puts it all out again. The char "
+             "is drawn as a decal, so it works on your existing HDRP materials without changing a single one.",
+        videos=[("wIvYNtdIUYg", "Scorch trailer", "Dynamic fire & burn system for HDRP"),
+                ("udAjyNgGtLE", "Scorch 1.1 update", "Particles Enhanced: sharp, realistic flames")],
+        features=[
+            ("Burns what you have", ["Char, soot and glowing embers on your existing HDRP materials",
+                                     "A glowing burn front that climbs faster than it spreads down",
+                                     "Burns move with the object, and burnt stays burnt"]),
+            ("Fire that behaves", ["Spreads object to object, faster downwind and upward",
+                                   "7 material presets, from paper and hay to hardwood beams",
+                                   "Dies down into smouldering embers before going out"]),
+            ("Three flame modes", ["Particles: soft, layered and cheap enough for a burning street",
+                                   "Particles Enhanced (1.1): sharp, torn flames baked from a 3D combustion simulation",
+                                   "Volumetric: a live 3D simulation for hero fires; switch any time"]),
+            ("Water & explosions", ["Hoses, buckets and rain put fires out in a burst of steam",
+                                    "Soaked walls make firebreaks that dry out again",
+                                    "Explosive objects with chain reactions, or explosions in one call"]),
+            ("Smoke, light & sound", ["Smoke by fuel, sparks, embers, ash and heat haze",
+                                      "Firelight with soft shadows; soot and blast marks on any surface",
+                                      "Original fire, crackle, steam and explosion sounds"]),
+            ("Workflow", ["Fire Manager with a live monitor and one-click setup check",
+                          "Quality tiers Low to Ultra with a live cost readout (1.1)",
+                          "C# API with events, heat queries and save/restore"]),
+        ],
+        gallery=[("15_enhanced_hero", "Particles Enhanced flames"), ("16_enhanced_three_modes", "Three flame modes"),
+                 ("02_before_after", "Before and after the fire"), ("03_burn_front", "Glowing burn front"),
+                 ("04_spread", "Fire spreading between objects"), ("06_water", "Water putting the fire out"),
+                 ("07_explosion", "Explosive barrels"), ("09_night", "Firelight at night")],
+        specs=[("Unity", "6.0 LTS or newer"), ("Render pipeline", "HDRP 17.0+"),
+               ("Flame modes", "Particles, Enhanced, Volumetric"), ("Version", "1.1"),
+               ("Demo scenes", "3, incl. a 100-object large-scale demo"), ("Content", "100% original")],
     ),
     dict(
         slug="editor-customizer", name="Editor Customizer", sub="Themes, Hierarchy, Toolbar & Editor Health",
@@ -171,9 +234,10 @@ ASSETS = [
 ]
 
 UPCOMING = [
-    dict(slug="scorch", name="Scorch", sub="Dynamic Fire & Burn System for HDRP", pipelines=["HDRP"],
-         status="Coming soon",
-         tag="Fire that spreads, chars and burns through any object, without changing its materials."),
+    dict(slug="pzenos", name="P_Zenos", sub="Third-person action-adventure project for Unity HDRP", pipelines=["HDRP"],
+         status="Patreon project",
+         tag="My own cinematic action-adventure game and framework for Unity, with its own original mechanics. "
+             "Devlogs and updates on Patreon."),
     dict(slug="dustfall", name="Dustfall", sub="Sand, Dust & Sandstorms for HDRP", pipelines=["HDRP"],
          status="In development",
          tag="Sand that takes footprints and tire tracks, dust on every surface, and towering sandstorms."),
@@ -222,8 +286,8 @@ def head(title, desc, path=""):
       <a href="index.html#assets">Assets</a>
       <a href="index.html#videos">Videos</a>
       <a href="index.html#about">About</a>
-      <a href="{PATREON}" target="_blank" rel="noopener">Patreon</a>
-      <a class="btn btn-primary btn-small" href="{STORE}" target="_blank" rel="noopener">Asset Store</a>
+      {ext(PATREON, "Patreon")}{(chr(10) + "      " + ext(DISCORD, "Discord")) if DISCORD else ""}
+      {ext(STORE, "Asset Store", "btn btn-primary btn-small")}
     </nav>
     <button class="theme-toggle" type="button" aria-label="Night mode" aria-pressed="false" title="Switch to night mode">
       <span class="tt-sky" aria-hidden="true"><i class="tt-cloud c1"></i><i class="tt-cloud c2"></i><i class="tt-star s1"></i><i class="tt-star s2"></i><i class="tt-star s3"></i><i class="tt-star s4"></i></span>
@@ -250,9 +314,7 @@ FOOT = f"""<footer>
     <div>
       <h4>Find me</h4>
       <ul>
-        <li><a href="{STORE}" target="_blank" rel="noopener">Unity Asset Store</a></li>
-        <li><a href="{YOUTUBE}" target="_blank" rel="noopener">YouTube</a></li>
-        <li><a href="{PATREON}" target="_blank" rel="noopener">Patreon</a></li>
+        {"".join(f"<li>{ext(h, t)}</li>" for h, t in FIND_ME if h)}
         <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
       </ul>
     </div>
@@ -260,7 +322,8 @@ FOOT = f"""<footer>
   </div>
 </footer>
 <script src="js/site.js?v={VER}"></script>
-<script src="js/grid.js?v={VER}"></script>
+<script src="js/grid.js?v={VER}"></script>{f'''
+<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>''' if GOATCOUNTER else ""}
 </body>
 </html>
 """
@@ -298,11 +361,12 @@ def teaser(a):
 </a>"""
 
 def index():
-    vids = [v for a in sorted(ASSETS, key=lambda a: bool(a["store"])) for v in a["videos"]]
+    # One video per asset on the homepage (its main trailer); updates stay on the product pages.
+    vids = [a["videos"][0] for a in sorted(ASSETS, key=lambda a: bool(a["store"]))]
     live = sum(1 for a in ASSETS if a["store"])
     return head("Jamzey St. · Weather, surfaces & VFX for Unity",
-                "Drop-in environment tools for Unity: deformable snow, rain and wet surfaces, and silhouette "
-                "parallax occlusion mapping for HDRP and URP.") + f"""
+                "Drop-in environment tools for Unity: deformable snow, rain and wet surfaces, spreading fire, and "
+                "silhouette parallax occlusion mapping for HDRP and URP.") + f"""
 <main id="main">
 <section class="hero">
   <img class="blocks blocks-left" src="img/blocks-left.svg" alt="" width="345" height="274" decoding="async">
@@ -311,7 +375,7 @@ def index():
     <span class="eyebrow">Jamzey St.</span>
     <h1>Weather, surfaces <em>&amp;</em> VFX</h1>
     <p class="lead">Drop-in environment tools for Unity. Snow that takes footprints, rain that soaks every surface,
-      and relief with real depth, all working on any shader with no material changes.</p>
+      fire that spreads and chars, and relief with real depth, all working on any shader with no material changes.</p>
     <div class="cta">
       <a class="btn btn-primary" href="#assets">Browse assets</a>
       <a class="btn btn-ghost" href="#videos">Watch the trailers</a>
@@ -342,7 +406,8 @@ def index():
   <div class="wrap">
     <div class="sec-head">
       <div><div class="kicker">In the workshop</div><h2>Coming <em>next</em></h2></div>
-      <p>Fire, sand and autumn leaves are on the bench. Patreon members see them first.</p>
+      <p>Sand and autumn leaves are on the bench, next to P_Zenos, my own action-adventure project. Patreon members
+        see them first.</p>
     </div>
     <div class="cards">
 {"".join(teaser(a) for a in UPCOMING)}
@@ -369,7 +434,7 @@ def index():
       <div class="kicker">About</div>
       <h2>Making worlds feel <em>alive</em></h2>
       <p>Jamzey St. is an independent studio making environment tools for Unity: snow that piles up and takes
-        footprints, rain that soaks surfaces, and surfaces with real depth.</p>
+        footprints, rain that soaks surfaces, fire that spreads and chars, and surfaces with real depth.</p>
       <p>Every package is built and tested in Unity 6, uses its own original textures, meshes and shaders, and is
         designed to work with the scenes and shaders you already have.</p>
     </div>
@@ -386,10 +451,10 @@ def index():
   <div class="wrap">
     <div>
       <h2>Follow what's next</h2>
-      <p>Work-in-progress builds, behind-the-scenes breakdowns and early looks at upcoming assets.</p>
+      <p>P_Zenos devlogs, work-in-progress builds, behind-the-scenes breakdowns and early looks at upcoming assets.</p>
     </div>
     <div class="cta" style="display:flex;gap:12px;flex-wrap:wrap">
-      <a class="btn" href="{PATREON}" target="_blank" rel="noopener">Join on Patreon</a>
+      {ext(PATREON, "Join on Patreon", "btn")}{(chr(10) + "      " + ext(NEWSLETTER, "Get launch emails", "btn btn-ghost")) if NEWSLETTER else ""}{(chr(10) + "      " + ext(DISCORD, "Join the Discord", "btn btn-ghost")) if DISCORD else ""}
       <a class="btn btn-ghost" href="mailto:{EMAIL}">Get in touch</a>
     </div>
   </div>
@@ -432,7 +497,7 @@ def product(a):
   <div class="wrap">
     <div class="sec-head"><div><div class="kicker">Features</div><h2>What's <em>inside</em></h2></div></div>
     <div class="features">
-{"".join(f'<div class="feature"><h3>{escape(t)}</h3><ul>{"".join(f"<li>{escape(x)}</li>" for x in items)}</ul></div>' for t, items in a['features'])}
+{"".join(f'<div class="feature{" wide" if i == 0 and "new" in a else ""}"><h3>{escape(t)}</h3><ul>{"".join(f"<li>{escape(x)}</li>" for x in items)}</ul></div>' for i, (t, items) in enumerate(([a["new"]] if "new" in a else []) + a['features']))}
     </div>
   </div>
 </section>
@@ -459,7 +524,7 @@ def product(a):
 <section style="padding-top:0">
   <div class="wrap">
     <div class="sec-head"><div><div class="kicker">More from Jamzey St.</div><h2>Other assets</h2></div></div>
-    <div class="cards">
+    <div class="cards{' two' if len(others) % 3 else ''}">
 {"".join(card(o) for o in others)}
     </div>
   </div>
