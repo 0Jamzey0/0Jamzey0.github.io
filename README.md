@@ -1,10 +1,5 @@
-# Jamzey St. portfolio
+# Moved
 
-Static site for https://0jamzey0.github.io/, served by GitHub Pages from `main`.
+The Jamzey St. site now lives at https://jamzeyst.github.io/ (repository `JamzeySt/jamzeyst.github.io`).
 
-- Page content lives in `tools/build.py`; edit it, then run `python tools/build.py` to regenerate the HTML.
-- `tools/prepare_media.py` copies and resizes gallery images from `D:/StoreAssetProjects_Media/Publishing`.
-- `tools/blocks.py` draws the isometric brand blocks as SVG.
-
-- After prepare_media.py, run python tools/to_webp.py to make the WebP versions the pages use (the JPG card/social files stay for link previews), then python tools/build.py.
-- Fonts are self-hosted in onts/.
+This repository only forwards old links: `index.html` sends the home page there, and `404.html` sends every other old page (for example `/frostfall.html` or `/pzenos.html`) to the same page at the new address. The full site history stays in this repository's commits.
