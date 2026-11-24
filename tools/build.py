@@ -4,7 +4,8 @@ from html import escape
 
 SITE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VER = hashlib.sha1(b"".join(open(os.path.join(SITE, f), "rb").read()
-                            for f in ("css/style.css", "js/site.js", "js/grid.js"))).hexdigest()[:8]
+                            for f in ("css/style.css", "css/gate.css", "css/zenos.css", "js/site.js", "js/grid.js",
+                                      "js/gate.js", "js/zenos.js"))).hexdigest()[:8]
 URL = "https://0jamzey0.github.io/"
 STORE = "https://assetstore.unity.com/publishers/100637"
 YOUTUBE = "https://www.youtube.com/@Jamzey-Dev"
@@ -234,10 +235,6 @@ ASSETS = [
 ]
 
 UPCOMING = [
-    dict(slug="pzenos", name="P_Zenos", sub="Third-person action-adventure project for Unity HDRP", pipelines=["HDRP"],
-         status="Patreon project",
-         tag="My own cinematic action-adventure game and framework for Unity, with its own original mechanics. "
-             "Devlogs and updates on Patreon."),
     dict(slug="dustfall", name="Dustfall", sub="Sand, Dust & Sandstorms for HDRP", pipelines=["HDRP"],
          status="In development",
          tag="Sand that takes footprints and tire tracks, dust on every surface, and towering sandstorms."),
@@ -245,6 +242,65 @@ UPCOMING = [
          pipelines=["HDRP", "URP"], status="In development",
          tag="Autumn leaves that fall, gather and drift through your scenes as the season turns."),
 ]
+
+# ---------------------------------------------------------------- P_Zenos
+# Its own site inside the site (pzenos.html). Shots are img/pzenos/NN.webp, numbered in filename order by
+# tools/prepare_zenos.py from F:/P_ZeonVer1/Screenshots. Edit any text below, then rebuild.
+PZ_SLOGAN = "The One that Started it All"
+PZ_SHOTS = {
+    0: "Close-up", 1: "Close-up", 2: "Face to face", 3: "Ready to go", 4: "Over the shoulder", 5: "Into the sun",
+    6: "Going prone", 7: "Rifle up", 8: "Swimming", 9: "Cutting through the surface", 10: "Under the surface",
+    11: "Diving deep", 12: "Underwater", 13: "At the water's edge", 14: "Ladder climb",
+    15: "Climbing out of the water", 16: "Swimming the pool", 17: "Balance beam", 18: "Holding a breath",
+    19: "Boat on open water", 20: "Full throttle", 21: "At the wheel", 22: "The wake from above", 23: "On the move",
+    24: "Explosion", 25: "The horse", 26: "Up against the wall", 27: "Into the light", 28: "Laser sight",
+}
+PZ_HERO = [5, 14, 21, 11, 24, 25, 7]          # hero slideshow, in order
+PZ_STORY_SHOT = 2
+PZ_BIG = {5, 11, 21, 24, 14}                  # larger tiles in the photo grid
+PZ_WINDOWS = [                                # (id, tab, title, text, shots)
+    ("water", "Water", "Into the water", "Swim the surface, then dive below it and hold your breath.", [9, 8, 11, 12, 18, 16]),
+    ("climb", "Climb", "Up and over", "Ladders, walls, ledges and narrow beams.", [14, 15, 26, 17, 13]),
+    ("boats", "Boats", "Open water", "Take the wheel and cut across the waves.", [21, 19, 20, 22]),
+    ("ride", "Ride", "Saddle up", "A horse for the long road.", [25]),
+    ("action", "Action", "Under fire", "Aim, fire and get clear of the blast.", [24, 7, 28, 6]),
+    ("hero", "Hero", "The hero", "Up close with the one who started it all.", [2, 0, 3, 4, 5, 27, 23]),
+]
+PZ_VIDEOS = []                                # add (youtube_id, title, note) when the first devlog is up
+PZ_STATS = [("Unity 6", "Engine"), ("HDRP", "Pipeline"), ("Ray tracing", "Lighting"), ("In development", "Status")]
+
+def pz_img(n, thumb=False):
+    return f"img/pzenos/{n:02d}{'_thumb' if thumb else ''}.webp"
+
+def letters(word, cls="pz-word"):
+    """A word split into letters for staggered animation; screen readers get the whole word."""
+    return (f'<span class="{cls}"><span class="pz-sr">{escape(word)}</span>' +
+            "".join(f'<span aria-hidden="true" style="--i:{i}">{escape(c)}</span>' for i, c in enumerate(word)) +
+            "</span>")
+
+_TICKS = "".join(f'<line x1="50" y1="5.5" x2="50" y2="{9.5 if i % 3 == 0 else 7.5}" transform="rotate({i * 10} 50 50)"/>'
+                 for i in range(36))
+EMBLEM = (
+    '<svg class="pz-emblem" viewBox="0 0 100 100" aria-hidden="true" focusable="false">'
+    '<circle class="pz-ring" cx="50" cy="50" r="46" transform="rotate(-90 50 50)"/>'
+    '<circle class="pz-ring2" cx="50" cy="50" r="38"/>'
+    f'<g class="pz-ticks">{_TICKS}</g>'
+    '<g class="pz-star"><path d="M50 13 L55.5 44.5 L87 50 L55.5 55.5 L50 87 L44.5 55.5 L13 50 L44.5 44.5Z"/>'
+    '<path class="pz-star2" d="M50 28 L52.5 47.5 L72 50 L52.5 52.5 L50 72 L47.5 52.5 L28 50 L47.5 47.5Z" transform="rotate(45 50 50)"/></g>'
+    '<circle class="pz-hub" cx="50" cy="50" r="4.5"/></svg>'
+)
+_WAVE = "M0 30 Q150 0 300 30 T600 30 T900 30 T1200 30 V60 H0Z"
+_BUBBLES = "".join(f'<i style="--x:{x}%;--s:{s}px;--d:{d}s;--w:{w}s"></i>' for x, s, d, w in [
+    (6, 10, 3.4, 0), (14, 6, 2.8, .6), (22, 14, 4.2, .2), (31, 8, 3.1, 1.1), (39, 5, 2.6, .4), (47, 12, 3.8, .9),
+    (55, 7, 2.9, .1), (63, 16, 4.6, .7), (71, 6, 2.7, 1.3), (78, 10, 3.5, .3), (86, 8, 3.0, .8), (93, 13, 4.0, .5)])
+
+def gate(state=""):
+    cls = f"pz-gate {state}".strip()
+    return (f'<div class="{cls}" id="pz-gate" aria-hidden="true">'
+            f'<div class="pz-water"><svg class="pz-wave back" viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="{_WAVE}"/></svg>'
+            f'<svg class="pz-wave" viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="{_WAVE}"/></svg></div>'
+            f'<div class="pz-bubbles">{_BUBBLES}</div>'
+            f'<div class="pz-gate-core">{EMBLEM}{letters("P_ZENOS")}<p class="pz-slogan">{escape(PZ_SLOGAN)}</p></div></div>')
 
 def chips(a):
     return '<div class="chips">' + "".join(
@@ -272,9 +328,11 @@ def head(title, desc, path=""):
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#E9E7DA">
 <script>try{{if(localStorage.getItem("theme")==="dark"){{document.documentElement.dataset.theme="dark";document.querySelector('meta[name="theme-color"]').content="#141312"}}}}catch(e){{}}</script>
+<script>try{{if(sessionStorage.getItem("pz-nav")==="jamzey"&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("jz-arrive")}}catch(e){{}}</script>
 <link rel="icon" href="favicon.png">
 <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css?v={VER}">
+<link rel="stylesheet" href="css/gate.css?v={VER}">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -286,6 +344,7 @@ def head(title, desc, path=""):
       <a href="index.html#assets">Assets</a>
       <a href="index.html#videos">Videos</a>
       <a href="index.html#about">About</a>
+      <a class="nav-pz" href="pzenos.html" data-zenos>P_Zenos</a>
       {ext(PATREON, "Patreon")}{(chr(10) + "      " + ext(DISCORD, "Discord")) if DISCORD else ""}
       {ext(STORE, "Asset Store", "btn btn-primary btn-small")}
     </nav>
@@ -309,7 +368,7 @@ FOOT = f"""<footer>
     </div>
     <div>
       <h4>Assets</h4>
-      <ul>{"".join(f'<li><a href="{a["slug"]}.html">{a["name"]}</a></li>' for a in ASSETS)}</ul>
+      <ul>{"".join(f'<li><a href="{a["slug"]}.html">{a["name"]}</a></li>' for a in ASSETS)}<li><a href="pzenos.html" data-zenos>P_Zenos</a></li></ul>
     </div>
     <div>
       <h4>Find me</h4>
@@ -322,7 +381,9 @@ FOOT = f"""<footer>
   </div>
 </footer>
 <script src="js/site.js?v={VER}"></script>
-<script src="js/grid.js?v={VER}"></script>{f'''
+<script src="js/grid.js?v={VER}"></script>
+<template id="pz-gate-tpl">{gate()}</template>
+<script src="js/gate.js?v={VER}"></script>{f'''
 <script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>''' if GOATCOUNTER else ""}
 </body>
 </html>
@@ -402,14 +463,28 @@ def index():
   </div>
 </section>
 
-<section id="upcoming" style="padding-top:0">
+<section id="pzenos" class="pz-portal">
+  <div class="wrap">
+    <a class="pz-portal-link" href="pzenos.html" data-zenos>
+      <span class="pz-portal-bg"><img src="{pz_img(19)}" alt="" loading="lazy" decoding="async" width="1920" height="1080"></span>
+      <span class="pz-portal-in">
+        {EMBLEM}
+        <span class="pz-portal-kicker">Where it all began</span>
+        {letters("P_ZENOS")}
+        <span class="pz-slogan">{escape(PZ_SLOGAN)}</span>
+        <span class="pz-portal-cta">Enter P_Zenos →</span>
+      </span>
+    </a>
+  </div>
+</section>
+
+<section id="upcoming">
   <div class="wrap">
     <div class="sec-head">
       <div><div class="kicker">In the workshop</div><h2>Coming <em>next</em></h2></div>
-      <p>Sand and autumn leaves are on the bench, next to P_Zenos, my own action-adventure project. Patreon members
-        see them first.</p>
+      <p>Sand and autumn leaves are on the bench. Patreon members see them first.</p>
     </div>
-    <div class="cards">
+    <div class="cards{' two' if len(UPCOMING) % 3 else ''}">
 {"".join(teaser(a) for a in UPCOMING)}
     </div>
   </div>
@@ -539,10 +614,195 @@ def product(a):
 </dialog>
 """ + FOOT
 
+def zenos():
+    title = f"P_Zenos · {PZ_SLOGAN} · Jamzey St."
+    desc = ("P_Zenos is a cinematic third-person action-adventure in development in Unity 6 with HDRP and ray "
+            "tracing, and the project Jamzey St. began with. Devlogs and updates on Patreon.")
+    pad = lambda n: f"{n:02d}"
+    first, rest = ' class="on" fetchpriority="high"', ' loading="lazy"'
+    slides = "".join(
+        f'<img src="{pz_img(n)}" alt="{escape(PZ_SHOTS[n])}" width="1920" height="1080" decoding="async"{first if i == 0 else rest}>'
+        for i, n in enumerate(PZ_HERO))
+    dots = "".join(f'<button type="button" aria-label="Show shot {i + 1}"></button>' for i in range(len(PZ_HERO)))
+    tabs = "".join(
+        f'<button type="button" role="tab" id="tab-{w}" aria-controls="win-{w}" aria-selected="{"true" if i == 0 else "false"}"'
+        f' tabindex="{0 if i == 0 else -1}">{escape(t)}</button>'
+        for i, (w, t, *_rest) in enumerate(PZ_WINDOWS))
+    windows = "".join(f"""
+<div class="pz-window" id="win-{w}" role="tabpanel" aria-labelledby="tab-{w}"{"" if i == 0 else " hidden"}>
+  <div class="pz-bar"><i></i><i></i><i></i><b>P_Zenos</b> / {escape(t)}<span class="rec">Live in Unity</span></div>
+  <div class="pz-win-body">
+    <figure class="pz-view"><img src="{pz_img(shots[0])}" alt="{escape(PZ_SHOTS[shots[0]])}" width="1920" height="1080" loading="lazy" decoding="async"></figure>
+    <div class="pz-side">
+      <span class="pz-count">01 / {pad(len(shots))}</span>
+      <h3>{escape(h)}</h3>
+      <p>{escape(text)}</p>
+      <div class="pz-thumbs">{"".join(f'<button type="button" data-full="{pz_img(n)}" aria-pressed="{"true" if j == 0 else "false"}" aria-label="{escape(PZ_SHOTS[n])}"><img src="{pz_img(n, True)}" alt="{escape(PZ_SHOTS[n])}" width="640" height="360" loading="lazy" decoding="async"></button>' for j, n in enumerate(shots))}</div>
+    </div>
+  </div>
+</div>""" for i, (w, t, h, text, shots) in enumerate(PZ_WINDOWS))
+    if PZ_VIDEOS:
+        videos = f'<div class="pz-videos">{"".join(video(*v) for v in PZ_VIDEOS)}</div>'
+    else:
+        on = ' class="on"'
+        soon = "".join(f'<img src="{pz_img(n)}" alt="" width="1920" height="1080" loading="lazy" decoding="async"{on if i == 0 else ""}>'
+                       for i, n in enumerate([27, 19, 11, 24, 14]))
+        videos = f"""<div class="pz-window pz-soon">
+  <div class="pz-bar"><i></i><i></i><i></i><b>P_Zenos</b> / Devlog 01<span class="rec">In the edit</span></div>
+  <figure class="pz-view">{soon}
+    <figcaption class="pz-soon-in">
+      <strong>Devlog 01 is coming</strong>
+      <p>The first P_Zenos devlog is being cut right now. Subscribe on YouTube, or join on Patreon to see it first.</p>
+      <span class="cta">{ext(PATREON, "Join on Patreon", "pz-btn")}{ext(YOUTUBE, "Subscribe on YouTube", "pz-ghost")}</span>
+    </figcaption>
+  </figure>
+</div>"""
+    gallery = "".join(
+        f'<button type="button" class="{"big" if n in PZ_BIG else ""}" data-full="{pz_img(n)}" data-n="{pad(n)}">'
+        f'<img src="{pz_img(n, n not in PZ_BIG)}" alt="{escape(PZ_SHOTS[n])}" loading="lazy" decoding="async" width="{1920 if n in PZ_BIG else 640}" height="{1080 if n in PZ_BIG else 360}"></button>'
+        for n in sorted(PZ_SHOTS))
+    stats = "".join(f"<div><b>{escape(v)}</b><span>{escape(k)}</span></div>" for v, k in PZ_STATS)
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{escape(title)}</title>
+<meta name="description" content="{escape(desc)}">
+<meta property="og:title" content="{escape(title)}">
+<meta property="og:description" content="{escape(desc)}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{URL}pzenos.html">
+<meta property="og:image" content="{URL}img/pzenos/card.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#03141A">
+<link rel="icon" href="favicon.png">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{pz_img(PZ_HERO[0])}" as="image" fetchpriority="high">
+<link rel="stylesheet" href="css/gate.css?v={VER}">
+<link rel="stylesheet" href="css/zenos.css?v={VER}">
+</head>
+<body class="pz">
+{gate("full")}
+<script>try{{if(sessionStorage.getItem("pz-nav")!=="zenos")document.getElementById("pz-gate").className="pz-gate intro"}}catch(e){{}}</script>
+<a class="skip" href="#main">Skip to content</a>
+<div class="pz-sea" aria-hidden="true"></div>
+<div class="pz-watermark" aria-hidden="true">{EMBLEM}</div>
+<header class="pz-top">
+  <div class="wrap">
+    <a class="pz-brand" href="#top">{EMBLEM}{letters("P_ZENOS")}</a>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="nav">
+      <a href="#story">Story</a>
+      <a href="#windows">Windows</a>
+      <a href="#videos">Videos</a>
+      <a href="#photos">Photos</a>
+      {ext(PATREON, "Patreon", "pz-btn")}
+      <a class="pz-back" href="index.html" data-jamzey><img src="img/mark.webp" alt="" width="18" height="22">Jamzey St.</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="pz-hero" id="top">
+  <div class="pz-slides">{slides}</div>
+  <div class="pz-hero-in">
+    <span class="pz-kicker" style="--d:0">A Jamzey St. original · In development</span>
+    <h1 style="--d:.1">{letters("P_ZENOS")}</h1>
+    <p class="pz-slogan" style="--d:.55">{escape(PZ_SLOGAN)}</p>
+    <div class="cta" style="--d:.75">{ext(PATREON, "Follow on Patreon", "pz-btn")}<a class="pz-ghost" href="#windows">Explore the windows</a></div>
+  </div>
+  <div class="pz-dots">{dots}</div>
+  <span class="pz-scroll" aria-hidden="true"></span>
+</section>
+
+<section class="pz-story" id="story">
+  <div class="wrap">
+    <div class="pz-head" data-reveal>
+      <span class="pz-kicker">Chapter one</span>
+      <h2>The one that <em>started it all</em></h2>
+      <p>Before the snow, the rain and the fire, there was P_Zenos: my own cinematic third-person action-adventure,
+        built in Unity 6 with HDRP and ray tracing. It's the project Jamzey St. began with.</p>
+      <p>Every swim, climb, boat ride and explosion on this page is a real-time shot from the game. It's still in
+        development, and you can follow every step of it on Patreon.</p>
+      <div class="pz-stats">{stats}</div>
+    </div>
+    <figure class="pz-frame" data-reveal><img src="{pz_img(PZ_STORY_SHOT)}" alt="{escape(PZ_SHOTS[PZ_STORY_SHOT])}" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>P_Zenos · {escape(PZ_SHOTS[PZ_STORY_SHOT])}</figcaption></figure>
+  </div>
+</section>
+
+<section id="windows">
+  <div class="wrap">
+    <div class="pz-head" data-reveal>
+      <span class="pz-kicker">Windows</span>
+      <h2>Windows into <em>the world</em></h2>
+      <p>Pick a window. Each one opens on a part of P_Zenos, captured in the editor.</p>
+    </div>
+    <div data-reveal>
+      <div class="pz-tabs" role="tablist" aria-label="P_Zenos windows">{tabs}</div>{windows}
+    </div>
+  </div>
+</section>
+
+<section id="videos">
+  <div class="wrap">
+    <div class="pz-head" data-reveal>
+      <span class="pz-kicker">Videos</span>
+      <h2>See it <em>move</em></h2>
+      <p>Devlogs and gameplay captures from P_Zenos.</p>
+    </div>
+    <div data-reveal>{videos}</div>
+  </div>
+</section>
+
+<section id="photos">
+  <div class="wrap">
+    <div class="pz-head" data-reveal>
+      <span class="pz-kicker">Photo mode</span>
+      <h2>Every <em>shot</em></h2>
+      <p>{len(PZ_SHOTS)} shots straight from the game. Click any of them to see it full size.</p>
+    </div>
+    <div class="gallery" data-reveal>{gallery}</div>
+  </div>
+</section>
+
+<section class="pz-join">
+  <div class="wrap" data-reveal>
+    {EMBLEM}
+    <h2>Be there <em>from the start</em></h2>
+    <p>Devlogs, work-in-progress builds and behind-the-scenes breakdowns of P_Zenos land on Patreon first.</p>
+    <div class="cta">{ext(PATREON, "Join on Patreon", "pz-btn")}{ext(YOUTUBE, "YouTube", "pz-ghost")}<a class="pz-ghost" href="index.html" data-jamzey>Jamzey St. tools</a></div>
+  </div>
+</section>
+</main>
+<dialog class="lightbox">
+  <img alt="">
+  <p></p>
+  <button class="lb-btn lb-prev" aria-label="Previous">‹</button>
+  <button class="lb-btn lb-next" aria-label="Next">›</button>
+  <button class="lb-btn lb-close" aria-label="Close">✕</button>
+</dialog>
+<footer class="pz-foot">
+  <div class="wrap">
+    <a class="pz-brand" href="#top">{EMBLEM}{letters("P_ZENOS")}</a>
+    <span>A Jamzey St. project</span>
+    <nav>{ext(PATREON, "Patreon")}{ext(YOUTUBE, "YouTube")}<a href="index.html" data-jamzey>Jamzey St.</a><a href="mailto:{EMAIL}">{EMAIL}</a></nav>
+    <p class="fine">© 2026 Jamzey St. All screenshots are real-time captures from P_Zenos in development. Unity is a trademark of Unity Technologies; this site is not affiliated with Unity.</p>
+  </div>
+</footer>
+<script src="js/site.js?v={VER}"></script>
+<script src="js/gate.js?v={VER}"></script>
+<script src="js/zenos.js?v={VER}"></script>{f'''
+<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>''' if GOATCOUNTER else ""}
+</body>
+</html>
+"""
+
 def write(name, html):
     open(os.path.join(SITE, name), "w", encoding="utf-8", newline="\n").write(html)
 
 write("index.html", index())
 for a in ASSETS:
     write(f"{a['slug']}.html", product(a))
-print("built", 1 + len(ASSETS), "pages")
+write("pzenos.html", zenos())
+print("built", 2 + len(ASSETS), "pages")
